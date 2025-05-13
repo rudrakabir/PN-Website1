@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's Going On</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      font-family: 'Georgia', serif;
+      color: black;
+    }
+
+    header {
+      background-color: white;
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    nav {
+      font-size: 1em;
+      font-family: 'Georgia', serif;
+    }
+
+    nav a {
+      margin: 0 1em;
+      text-decoration: none;
+      color: black;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #555;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 2em;
+      box-sizing: border-box;
+    }
+
+    .gallery-item {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background-color: #f2f2f2;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-weight: bold;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 1.1em;
+      color: black;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 0.95);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .modal img {
+      max-width: 80%;
+      max-height: 80%;
+      margin-bottom: 1em;
+      object-fit: contain;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2em;
+      cursor: pointer;
+      color: black;
+      font-weight: bold;
+    }
+
+    .arrow {
+      font-size: 2em;
+      color: black;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: bold;
+    }
+
+    .arrow.left {
+      left: 30px;
+    }
+
+    .arrow.right {
+      right: 30px;
+    }
+
+    .email {
+      margin-top: 1em;
+      font-family: 'Georgia', serif;
+      font-size: 1em;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="publications.html">Publications</a>
+      <a href="artworks.html">Artworks</a>
+      <a href="whatsgoingon.html">What's Going On</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="gallery">
+    <!-- Block 1: 3 images -->
+    <div class="gallery-item" onclick="openModal(0)">
+      <img src="1.png" alt="Poems & Platters">
+      <div class="gallery-label">Poems & Platters</div>
+    </div>
+
+    <!-- Block 2: 2 images -->
+    <div class="gallery-item" onclick="openModal(1)">
+      <img src="editors1.png" alt="Editorial Services">
+      <div class="gallery-label">Editorial Services</div>
+    </div>
+
+    <!-- Block 3–8: Empty placeholders -->
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+  </section>
+
+  <!-- Modal -->
+  <div id="imageModal" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <span class="arrow left" onclick="prevImage()">&larr;</span>
+    <img id="modalImage" src="" alt="Modal Image">
+    <span class="arrow right" onclick="nextImage()">&rarr;</span>
+    <div id="modalEmail" class="email" style="display:none;">Email: <a href="mailto:whatpallavisaid@gmail.com">whatpallavisaid@gmail.com</a></div>
+  </div>
+
+  <script>
+    const imageGroups = [
+      ['1.png', '2.png', '3.png'],
+      ['editors1.png', 'editors2.png']
+    ];
+
+    let currentGroup = 0;
+    let currentImage = 0;
+
+    function openModal(groupIndex) {
+      currentGroup = groupIndex;
+      currentImage = 0;
+      document.getElementById('imageModal').style.display = 'flex';
+      updateModalImage();
+
+      const emailSection = document.getElementById('modalEmail');
+      emailSection.style.display = groupIndex === 1 ? 'block' : 'none';
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    function prevImage() {
+      if (currentImage > 0) {
+        currentImage--;
+        updateModalImage();
+      }
+    }
+
+    function nextImage() {
+      if (currentImage < imageGroups[currentGroup].length - 1) {
+        currentImage++;
+        updateModalImage();
+      }
+    }
+
+    function updateModalImage() {
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = imageGroups[currentGroup][currentImage];
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

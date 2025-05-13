@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editorial Services | Pallavi Narayan</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: white;
+      color: black;
+    }
+
+    header {
+      background-color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav {
+      font-size: 1em;
+      font-family: 'Georgia', serif;
+      font-weight: normal;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 1.5em;
+      color: black;
+      letter-spacing: 0.5px;
+    }
+
+    nav a:hover {
+      color: #555;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 85vh;
+    }
+
+    .gallery-block {
+      width: 450px;
+      height: 450px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .block-title {
+      text-align: center;
+      margin-top: 1em;
+      font-size: 1em;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: white;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .modal-content {
+      max-width: 60%;
+      max-height: 80vh;
+      object-fit: contain;
+      margin-bottom: 1em;
+    }
+
+    .close, .arrow {
+      position: absolute;
+      font-size: 2em;
+      color: black;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .close {
+      top: 20px;
+      right: 30px;
+    }
+
+    .arrow.left {
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+    }
+
+    .arrow.right {
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="publications.html">Publications</a>
+      <a href="artworks.html">Artworks</a>
+      <a href="editorialservices.html">Editorial Services</a>
+      <a href="workshops.html">Workshops</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="gallery">
+    <div class="gallery-block" onclick="openModal(0)">
+      <img src="12.jpeg" alt="Preview" />
+    </div>
+    <div class="block-title">Commissioned / Edited / Proofread</div>
+  </section>
+
+  <!-- Modal Viewer -->
+  <div class="modal" id="modal">
+    <button class="close" onclick="closeModal()">×</button>
+    <button class="arrow left" onclick="changeImage(-1)">‹</button>
+    <img id="modal-image" class="modal-content" src="" alt="Book"/>
+    <button class="arrow right" onclick="changeImage(1)">›</button>
+  </div>
+
+  <script>
+    const images = [
+      "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpeg", "18.jpeg",
+      "20.jpeg", "21.jpeg", "22.jpeg", "23.jpeg", "24.jpeg", "25.jpeg", "26.jpg",
+      "27.jpg", "28.jpeg", "29.jpeg"
+    ];
+
+    let currentIndex = 0;
+
+    function openModal(index) {
+      currentIndex = index;
+      document.getElementById("modal").style.display = "flex";
+      updateModalImage();
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function changeImage(direction) {
+      currentIndex = (currentIndex + direction + images.length) % images.length;
+      updateModalImage();
+    }
+
+    function updateModalImage() {
+      document.getElementById("modal-image").src = images[currentIndex];
+    }
+
+    window.addEventListener("keydown", function (e) {
+      if (document.getElementById("modal").style.display === "flex") {
+        if (e.key === "ArrowRight") changeImage(1);
+        if (e.key === "ArrowLeft") changeImage(-1);
+        if (e.key === "Escape") closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
