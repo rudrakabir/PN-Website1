@@ -2,70 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Editorial Services | Pallavi Narayan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editorial Services | Dr. Pallavi Narayan</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'Georgia', serif;
-      background: white;
-      color: black;
+      padding: 0;
     }
 
-    header {
-      background-color: white;
-      padding: 1em;
-      text-align: center;
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #000;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     nav {
-      font-size: 1em;
-      font-family: 'Georgia', serif;
-      font-weight: normal;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 20px;
+      background-color: #f7f7f7;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
     }
 
     nav a {
+      color: #000;
       text-decoration: none;
-      margin: 0 1.5em;
-      color: black;
-      letter-spacing: 0.5px;
+      font-size: 1em;
+      font-weight: 500;
+      position: relative;
     }
 
-    nav a:hover {
-      color: #555;
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: width 0.3s;
+      margin: 5px auto 0;
     }
 
-    .gallery {
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .container {
+      flex: 1 0 50vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 85vh;
-    }
-
-    .gallery-block {
-      width: 450px;
-      height: 450px;
-      background-color: #f0f0f0;
-      overflow: hidden;
-      cursor: pointer;
-      display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .gallery-block img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .block-title {
+      padding-top: 120px;
       text-align: center;
-      margin-top: 1em;
-      font-size: 1em;
-      font-weight: bold;
-      font-family: 'Georgia', serif;
+    }
+
+    .heading {
+      font-size: 2em;
+      font-family: 'Helvetica Neue', sans-serif;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .description {
+      max-width: 800px;
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #ddd;
+      padding: 0 20px;
+    }
+
+    .bottom-section {
+      flex: 1 0 50vh;
+      background-color: #000;
+      padding: 80px 20px 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bottom-section h2 {
+      font-size: 2em;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-weight: normal;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .book-slider {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 0 20px;
+      gap: 20px;
+    }
+
+    .book-slider img {
+      height: 360px;
+      object-fit: cover;
+      border: 1px solid #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .book-slider img:hover {
+      transform: scale(1.05);
     }
 
     .modal {
@@ -74,114 +128,163 @@
       z-index: 999;
       left: 0;
       top: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: white;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
       justify-content: center;
       align-items: center;
-      flex-direction: column;
     }
 
-    .modal-content {
-      max-width: 60%;
-      max-height: 80vh;
+    .modal img {
+      max-width: 80%;
+      max-height: 80%;
       object-fit: contain;
-      margin-bottom: 1em;
     }
 
-    .close, .arrow {
+    .close-btn,
+    .nav-btn {
       position: absolute;
-      font-size: 2em;
-      color: black;
       background: none;
       border: none;
+      color: white;
+      font-size: 2em;
       cursor: pointer;
-      z-index: 1000;
     }
 
-    .close {
+    .close-btn {
       top: 20px;
       right: 30px;
     }
 
-    .arrow.left {
-      top: 50%;
-      left: 30px;
-      transform: translateY(-50%);
+    .nav-btn.left {
+      left: 20px;
     }
 
-    .arrow.right {
-      top: 50%;
-      right: 30px;
-      transform: translateY(-50%);
+    .nav-btn.right {
+      right: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #aaa;
+      background-color: #000;
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="publications.html">Publications</a>
-      <a href="artworks.html">Artworks</a>
-      <a href="editorialservices.html">Editorial Services</a>
-      <a href="workshops.html">Workshops</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="artworks.html">Artworks</a>
+    <a href="editorialservices.html">Editorial Services</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-  <section class="gallery">
-    <div class="gallery-block" onclick="openModal(0)">
-      <img src="12.jpeg" alt="Preview" />
+  <div class="container">
+    <div class="heading">Editorial Services</div>
+    <div class="description">
+      Dr. Pallavi Narayan offers a range of editorial services including manuscript editing, academic proofreading,
+      publication consultancy, and structural review. With years of experience in academic and literary publishing,
+      she ensures precision, clarity, and a tailored approach for every project.
+      <br><br>
+      For editorial service requests, please reach out via the
+      <a href="contact.html" style="color: #fff; text-decoration: underline;">Contact page</a>.
     </div>
-    <div class="block-title">Commissioned / Edited / Proofread</div>
-  </section>
+  </div>
 
-  <!-- Modal Viewer -->
-  <div class="modal" id="modal">
-    <button class="close" onclick="closeModal()">×</button>
-    <button class="arrow left" onclick="changeImage(-1)">‹</button>
-    <img id="modal-image" class="modal-content" src="" alt="Book"/>
-    <button class="arrow right" onclick="changeImage(1)">›</button>
+  <div class="bottom-section">
+    <h2>Books Commissioned / Proofread / Edited</h2>
+    <div class="book-slider">
+      <img src="27.jpg" alt="Book 1" onclick="openModal(0)">
+      <img src="4.jpeg" alt="Book 2" onclick="openModal(1)">
+      <img src="5.jpeg" alt="Book 3" onclick="openModal(2)">
+      <img src="58.jpg" alt="Book 4" onclick="openModal(3)">
+      <img src="62.jpg.webp" alt="Book 5" onclick="openModal(4)">
+      <img src="64.jpg.webp" alt="Book 6" onclick="openModal(5)">
+      <img src="65.jpg.webp" alt="Book 7" onclick="openModal(6)">
+      <img src="66.jpg.webp" alt="Book 8" onclick="openModal(7)">
+      <img src="67.jpg" alt="Book 9" onclick="openModal(8)">
+      <img src="68.jpg.webp" alt="Book 10" onclick="openModal(9)">
+      <img src="69.jpg.webp" alt="Book 11" onclick="openModal(10)">
+      <img src="70.jpg.webp" alt="Book 12" onclick="openModal(11)">
+      <img src="71.jpg" alt="Book 13" onclick="openModal(12)">
+      <img src="72.jpeg.webp" alt="Book 14" onclick="openModal(13)">
+      <img src="73.jpg.webp" alt="Book 15" onclick="openModal(14)">
+      <img src="74.jpg.webp" alt="Book 16" onclick="openModal(15)">
+      <img src="75.jpg.webp" alt="Book 17" onclick="openModal(16)">
+      <img src="76.jpeg" alt="Book 18" onclick="openModal(17)">
+      <img src="77.jpeg" alt="Book 19" onclick="openModal(18)">
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Dr. Pallavi Narayan. All rights reserved.
+  </footer>
+
+  <div id="modal" class="modal">
+    <button class="close-btn" onclick="closeModal()">&times;</button>
+    <button class="nav-btn left" onclick="prevImage()">&#10094;</button>
+    <img id="modalImg" src="" alt="Book Full View">
+    <button class="nav-btn right" onclick="nextImage()">&#10095;</button>
   </div>
 
   <script>
     const images = [
-      "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpeg", "18.jpeg",
-      "20.jpeg", "21.jpeg", "22.jpeg", "23.jpeg", "24.jpeg", "25.jpeg", "26.jpg",
-      "27.jpg", "28.jpeg", "29.jpeg"
+      "editorial_book_images/27.jpg",
+      "editorial_book_images/4.jpeg",
+      "editorial_book_images/5.jpeg",
+      "editorial_book_images/58.jpg",
+      "editorial_book_images/62.jpg.webp",
+      "editorial_book_images/64.jpg.webp",
+      "editorial_book_images/65.jpg.webp",
+      "editorial_book_images/66.jpg.webp",
+      "editorial_book_images/67.jpg",
+      "editorial_book_images/68.jpg.webp",
+      "editorial_book_images/69.jpg.webp",
+      "editorial_book_images/70.jpg.webp",
+      "editorial_book_images/71.jpg.webp",
+      "editorial_book_images/72.jpg.webp",
+      "editorial_book_images/73.jpg.webp",
+      "editorial_book_images/74.jpg.webp",
+      "editorial_book_images/75.jpg.webp",
+      "editorial_book_images/76.jpg.webp",
+      "editorial_book_images/77.jpg.webp"
     ];
 
     let currentIndex = 0;
 
     function openModal(index) {
       currentIndex = index;
+      document.getElementById("modalImg").src = images[currentIndex];
       document.getElementById("modal").style.display = "flex";
-      updateModalImage();
     }
 
     function closeModal() {
       document.getElementById("modal").style.display = "none";
     }
 
-    function changeImage(direction) {
-      currentIndex = (currentIndex + direction + images.length) % images.length;
-      updateModalImage();
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      document.getElementById("modalImg").src = images[currentIndex];
     }
 
-    function updateModalImage() {
-      document.getElementById("modal-image").src = images[currentIndex];
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      document.getElementById("modalImg").src = images[currentIndex];
     }
-
-    window.addEventListener("keydown", function (e) {
-      if (document.getElementById("modal").style.display === "flex") {
-        if (e.key === "ArrowRight") changeImage(1);
-        if (e.key === "ArrowLeft") changeImage(-1);
-        if (e.key === "Escape") closeModal();
-      }
-    });
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 

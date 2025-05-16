@@ -3,147 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Me| Dr. Pallavi Narayan</title>
+  <title>Contact | Dr. Pallavi Narayan</title>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background-color: white;
-      color: black;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #000;
+      color: #fff;
+      height: 100vh;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-
-    header {
-      background-color: white;
-      text-align: center;
-      padding: 1em 0;
-    }
-
     nav {
-      font-family: 'Georgia', serif;
-      font-weight: normal;
-      font-size: 1em;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 20px;
+      background-color: #f7f7f7;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
     }
-
     nav a {
-      margin: 0 1.5em;
+      color: #000;
       text-decoration: none;
-      color: black;
+      font-size: 1em;
+      font-weight: 500;
+      position: relative;
     }
-
-    nav a:hover {
-      color: #666;
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: width 0.3s;
+      margin: 5px auto 0;
     }
+    nav a:hover::after { width: 100%; }
 
-    .page-container {
+    .container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 60px;
+      text-align: center;
+    }
+    .heading {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+    .contact-form {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: calc(100vh - 120px);
-      transition: all 0.3s ease;
-    }
-
-    .box-container {
-      display: flex;
-      gap: 60px;
-      margin-bottom: 40px;
-      transition: opacity 0.3s ease;
-    }
-
-    .box {
-      background-color: black;
-      color: white;
-      border: 1px solid black;
-      padding: 100px 80px;
-      text-align: center;
-      cursor: pointer;
-      font-size: 22px;
-      transition: background-color 0.2s ease;
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .box:hover {
-      background-color: #333;
-    }
-
-    .contact-form {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      width: 40%;
-      min-width: 320px;
+      width: 100%;
       max-width: 600px;
+      gap: 20px;
     }
-
     .contact-form input,
     .contact-form textarea {
       width: 100%;
       padding: 14px;
-      border: 1px solid #000;
+      border: 1px solid #fff;
+      background: #111;
+      color: #fff;
       font-size: 16px;
-      font-family: 'Georgia', serif;
     }
-
     .contact-form textarea {
       height: 160px;
       resize: none;
     }
-
     .contact-form button {
       width: 100%;
       padding: 14px;
-      border: 1px solid #000;
-      background: none;
-      cursor: pointer;
+      border: 1px solid #fff;
+      background-color: #000;
+      color: #fff;
       font-size: 16px;
-      font-family: 'Georgia', serif;
-    }
-
-    .hidden {
-      display: none !important;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="artworks.html">Artworks</a>
+    <a href="editorialservices.html">Editorial Services</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="publications.html">Publications</a>
-      <a href="artworks.html">Artworks</a>
-      <a href="editorialservices.html">Editorial Services</a>
-      <a href="workshops.html">Workshops</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <div class="page-container" id="pageContainer">
-    <div class="box-container" id="boxContainer">
-      <div class="box" onclick="showForm()">Editorial Services</div>
-      <div class="box" onclick="showForm()">Artworks</div>
-      <div class="box" onclick="showForm()">Workshops/Courses</div>
-    </div>
-
-    <form class="contact-form" id="contactForm" action="mailto:whatpallavisaid@gmail.com" method="POST" enctype="text/plain">
+  <div class="container">
+    <div class="heading">Get in Touch</div>
+    <form class="contact-form" action="mailto:whatpallavisaid@gmail.com" method="POST" enctype="text/plain">
       <input type="text" name="Name" placeholder="Your Name" required>
       <input type="email" name="Email" placeholder="Your Email" required>
       <textarea name="Message" placeholder="Your Message" required></textarea>
       <button type="submit">Send</button>
     </form>
   </div>
-
-  <script>
-    function showForm() {
-      document.getElementById('boxContainer').classList.add('hidden');
-      document.getElementById('contactForm').style.display = 'flex';
-    }
-  </script>
-
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 

@@ -15,10 +15,7 @@
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #fff;
       color: #000;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
 
     nav {
@@ -58,14 +55,14 @@
     }
 
     .hero {
-      flex-grow: 1;
+      height: 100vh;
       display: flex;
       align-items: flex-end;
       justify-content: center;
       text-align: center;
       padding-top: 100px;
-      background: url('Screenshot 2025-05-10 at 18.45.27.png') no-repeat center 25%;
-      background-size: contain;
+      background: url('Screenshot 2025-05-13 at 16.50.52.png') no-repeat center 30%;
+      background-size: cover;
       background-repeat: no-repeat;
       position: relative;
       color: #fff;
@@ -109,12 +106,53 @@
       font-weight: 300;
     }
 
+    .books-section {
+      height: 100vh;
+      padding: 6em 2em 1em;
+      text-align: center;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+    }
+
+    .books-section h2 {
+      font-size: 2em;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .books-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      padding: 2em 0;
+    }
+
+    .books-gallery img {
+      height: 400px;
+      width: auto;
+      border-radius: 10px;
+      box-shadow: 0 12px 24px rgba(255,255,255,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .books-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 16px 32px rgba(255,255,255,0.2);
+    }
+
     footer {
       text-align: center;
-      padding: 20px;
       font-size: 0.9em;
-      color: #777;
-      background: #f7f7f7;
+      color: #ccc;
+      background: transparent;
+      padding: 10px 0;
     }
   </style>
 </head>
@@ -139,11 +177,24 @@
     </div>
   </section>
 
-  <footer>
-    &copy; 2025 Dr. Pallavi Narayan. All rights reserved.
-  </footer>
+  <section class="books-section">
+    <h2 style="font-size: 3em; font-weight: 300; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">My Books</h2>
+    <div class="books-gallery">
+      <a href="https://www.amazon.in/Pamuks-Istanbul-Self-Pallavi-Narayan/dp/1032425334" target="_blank">
+        <img src="9780367760649.jpg" alt="Pamuk's Istanbul Cover">
+      </a>
+      <a href="https://www.amazon.com/Singapore-At-Home-Across-Lines/dp/9811480451" target="_blank">
+        <img src="61z-Pjv-kiS._SL1040_.jpg" alt="Singapore at Home Cover">
+      </a>
+    </div>
+    <footer>
+      &copy; 2025 Pallavi Narayan. All rights reserved.
+    </footer>
+  </section>
 </body>
 </html>
+
+
 
 
 
