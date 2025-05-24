@@ -1,3 +1,4 @@
+<!-- Full rewritten version of Publications page with simplified 'Papers' section -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +59,7 @@
       padding-right: 40px;
       overflow-y: auto;
     }
-    .pub-list h3, .pub-list h4 {
+    .pub-list h3 {
       font-size: 1.6em;
       font-weight: 400;
       border-bottom: 1px solid #777;
@@ -115,20 +116,14 @@
 
       <h3 onclick="toggleSection('papers')">Papers</h3>
       <div id="papers" class="sub-list">
-        <h4 onclick="toggleSection('referred')">Referred</h4>
-        <div id="referred" class="sub-list">
-  <span>2025. The Flâneuse in Turkish and Indian Fiction: Urban Inequality and Female Migrants. Urban Matters. Forthcoming July.</span>
-  <a href="https://muse.jhu.edu/pub/303/article/942138/pdf">2024. Shifting the Focus: World Literature Decentred by Ian Almond. Journal of Mediterranean Studies</a>
-  <a href="https://www.tandfonline.com/doi/full/10.1080/00049182.2022.2052556">2022. Editorial Introduction: Geography and Collective Memories through Art. Australian Geographer</a>
-  <a href="https://www.academia.edu/49100034/Resting_in_the_Met_Constructions_of_Homelike_Spaces_in_Christine_Coulson_s_Metropolitan_Stories">2021. Resting in the Met: Metropolitan Stories. Museologia e Interdisciplinaridade</a>
-  <a href="https://www.idea.org.tr/gender-domesticspace-novelsolddelhi">2021. Gender and Domestic Space in Ahmed Ali’s and Krishna Sobti’s Novels. IDEAS Journal</a>
-</div>
-        <h4 onclick="toggleSection('nonreferred')">Non-Referred</h4>
-        <div id="nonreferred" class="sub-list">
-  <a href="https://ghi2021.web.nycu.edu.tw/2021/01/07/documenting-visibility-representation-and-exclusion-across-borders/">2021. Documenting Visibility: Representation and Exclusion Across Borders</a>
-  <a href="https://cjdproject.web.nycu.edu.tw/wp-content/uploads/sites/167/2020/12/Narayan_2020_Decolonizing-the-Museum-Space-in-India.pdf">2021. Decolonizing the Museum Space in India: The Pandemic Influence</a>
-  <span>2013. Magical Objects: Visiting Orhan Pamuk’s Museum of Innocence. Literary Paritantra</span>
-</div>
+        <span>2025. The Flâneuse in Turkish and Indian Fiction: Urban Inequality and Female Migrants. Urban Matters. Forthcoming July.</span>
+        <a href="https://muse.jhu.edu/pub/303/article/942138/pdf">2024. Shifting the Focus: World Literature Decentred by Ian Almond. Journal of Mediterranean Studies</a>
+        <a href="https://www.tandfonline.com/doi/full/10.1080/00049182.2022.2052556">2022. Editorial Introduction: Geography and Collective Memories through Art. Australian Geographer</a>
+        <a href="https://www.academia.edu/49100034/Resting_in_the_Met_Constructions_of_Homelike_Spaces_in_Christine_Coulson_s_Metropolitan_Stories">2021. Resting in the Met: Metropolitan Stories. Museologia e Interdisciplinaridade</a>
+        <a href="https://www.idea.org.tr/gender-domesticspace-novelsolddelhi">2021. Gender and Domestic Space in Ahmed Ali’s and Krishna Sobti’s Novels. IDEAS Journal</a>
+        <a href="https://ghi2021.web.nycu.edu.tw/2021/01/07/documenting-visibility-representation-and-exclusion-across-borders/">2021. Documenting Visibility: Representation and Exclusion Across Borders</a>
+        <a href="https://cjdproject.web.nycu.edu.tw/wp-content/uploads/sites/167/2020/12/Narayan_2020_Decolonizing-the-Museum-Space-in-India.pdf">2021. Decolonizing the Museum Space in India: The Pandemic Influence</a>
+        <span>2013. Magical Objects: Visiting Orhan Pamuk’s Museum of Innocence. Literary Paritantra</span>
       </div>
 
       <h3 onclick="toggleSection('articles')">Articles</h3>
@@ -178,15 +173,16 @@
     </div>
   </div>
   <script>
-  function toggleSection(id) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.classList.toggle('show');
+    function toggleSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('show');
+      }
     }
-  }
-</script>
+  </script>
 </body>
 </html>
+
 
 
 
