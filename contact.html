@@ -11,7 +11,7 @@
       background-color: #000;
       color: #fff;
       height: 100vh;
-      overflow: hidden;
+      overflow: hidden; /* Consider changing to 'auto' or 'scroll' if content might overflow */
       display: flex;
       flex-direction: column;
     }
@@ -52,8 +52,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-top: 60px;
+      padding-top: 80px; /* Increased to account for fixed nav height */
+      padding-bottom: 20px; /* Added some bottom padding */
       text-align: center;
+      overflow-y: auto; /* Allow scrolling if content overflows */
     }
     .heading {
       font-size: 2em;
@@ -67,6 +69,7 @@
       justify-content: center;
       width: 100%;
       max-width: 600px;
+      padding: 0 20px; /* Add horizontal padding for smaller screens */
       gap: 20px;
     }
     .contact-form input,
@@ -77,19 +80,39 @@
       background: #111;
       color: #fff;
       font-size: 16px;
+      border-radius: 4px; /* Optional: slight rounding */
     }
     .contact-form textarea {
       height: 160px;
-      resize: none;
+      resize: vertical; /* Allow vertical resize, disable horizontal */
     }
     .contact-form button {
       width: 100%;
       padding: 14px;
       border: 1px solid #fff;
-      background-color: #000;
-      color: #fff;
+      background-color: #fff; /* Changed for better contrast/visibility */
+      color: #000;           /* Changed for better contrast/visibility */
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      border-radius: 4px; /* Optional: slight rounding */
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .contact-form button:hover {
+        background-color: #333;
+        color: #fff;
+        border-color: #333;
+    }
+
+    /* Basic success message styling (optional, Netlify has default) */
+    .form-success-message {
+        color: #28a745; /* Green for success */
+        background-color: #e9f7ef;
+        border: 1px solid #a1e0b6;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 4px;
+        text-align: left;
     }
   </style>
 </head>
@@ -105,27 +128,77 @@
 
   <div class="container">
     <div class="heading">Get in Touch</div>
-    <form class="contact-form" action="mailto:whatpallavisaid@gmail.com" method="POST" enctype="text/plain">
+    <!--
+      Key changes for Netlify Forms:
+      1. Removed: action="mailto:..."
+      2. Removed: enctype="text/plain"
+      3. Added: data-netlify="true"
+      4. Added: name="contact" to the form (good practice)
+      5. Kept: method="POST"
+    -->
+    <form class="contact-form" name="contact" method="POST" data-netlify="true">
+      <!-- Optional: Add a hidden field for Netlify to properly name the form if 'name' on form tag isn't enough -->
+      <input type="hidden" name="form-name" value="contact" />
+
       <input type="text" name="Name" placeholder="Your Name" required>
       <input type="email" name="Email" placeholder="Your Email" required>
       <textarea name="Message" placeholder="Your Message" required></textarea>
       <button type="submit">Send</button>
     </form>
+
+    <!-- You can also specify a custom success page: -->
+    <!-- <form class="contact-form" name="contact" method="POST" data-netlify="true" action="/thank-you.html"> -->
+    <!-- ... rest of form ... -->
+    <!-- </form> -->
+    <!-- Then create a thank-you.html page -->
+
   </div>
+
+  <script>
+    // Optional: Handle form submission with JavaScript for a smoother UX
+    // and to display custom messages without a full page reload.
+    // Netlify still handles the backend submission.
+    const form = document.querySelector('.contact-form');
+    if (form) {
+        form.addEventListener('submit', handleSubmit);
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault(); // Prevent default browser submission
+
+        const status = document.createElement('p');
+        status.classList.add('form-status-message'); // You'll need to style this
+        form.parentNode.insertBefore(status, form.nextSibling); // Insert after form
+
+        const formData = new FormData(event.target);
+        
+        try {
+            const response = await fetch('/', { // Netlify Forms submits to the current page path by default
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            });
+
+            if (response.ok) {
+                status.textContent = "Thanks for your message! I'll get back to you soon.";
+                status.style.color = 'lightgreen'; // Example styling
+                form.reset(); // Clear the form
+            } else {
+                // Try to get error from Netlify (might not always be detailed)
+                const data = await response.text();
+                status.textContent = `Oops! There was a problem submitting your form: ${data || response.statusText}`;
+                status.style.color = 'lightcoral'; // Example styling
+            }
+        } catch (error) {
+            status.textContent = 'Oops! There was a network error submitting your form.';
+            status.style.color = 'lightcoral'; // Example styling
+        }
+
+        // Remove the status message after a few seconds
+        setTimeout(() => {
+            status.remove();
+        }, 7000);
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
