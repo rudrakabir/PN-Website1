@@ -155,25 +155,27 @@
   </div>
 
   <script>
-    // Optional: Handle form submission with JavaScript for a smoother UX
-    // and to display custom messages without a full page reload.
-    // Netlify still handles the backend submission.
     const form = document.querySelector('.contact-form');
     if (form) {
         form.addEventListener('submit', handleSubmit);
     }
 
     async function handleSubmit(event) {
-        event.preventDefault(); // Prevent default browser submission
+        event.preventDefault();
 
         const status = document.createElement('p');
-        status.classList.add('form-status-message'); // You'll need to style this
-        form.parentNode.insertBefore(status, form.nextSibling); // Insert after form
+        status.classList.add('form-status-message');
+        const existingStatus = form.parentNode.querySelector('.form-status-message');
+        if (existingStatus) {
+            existingStatus.remove(); // Remove previous status message
+        }
+        form.parentNode.insertBefore(status, form.nextSibling);
 
         const formData = new FormData(event.target);
         
         try {
-            const response = await fetch('/', { // Netlify Forms submits to the current page path by default
+            // ***** THIS IS THE KEY CHANGE *****
+            const response = await fetch(event.target.action || window.location.pathname, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams(formData).toString()
@@ -181,22 +183,24 @@
 
             if (response.ok) {
                 status.textContent = "Thanks for your message! I'll get back to you soon.";
-                status.style.color = 'lightgreen'; // Example styling
-                form.reset(); // Clear the form
+                status.style.color = 'lightgreen';
+                form.reset();
             } else {
-                // Try to get error from Netlify (might not always be detailed)
-                const data = await response.text();
-                status.textContent = `Oops! There was a problem submitting your form: ${data || response.statusText}`;
-                status.style.color = 'lightcoral'; // Example styling
+                const errorText = await response.text(); // Get the actual error text
+                status.textContent = `Oops! There was a problem submitting your form. Server response: ${response.status} ${response.statusText}. Details: ${errorText}`;
+                status.style.color = 'lightcoral';
+                console.error("Form submission error details:", errorText); // Log the full HTML error for debugging
             }
         } catch (error) {
             status.textContent = 'Oops! There was a network error submitting your form.';
-            status.style.color = 'lightcoral'; // Example styling
+            status.style.color = 'lightcoral';
+            console.error("Network error:", error);
         }
 
-        // Remove the status message after a few seconds
         setTimeout(() => {
-            status.remove();
+            if (status.parentNode) { // Check if status is still in DOM
+                status.remove();
+            }
         }, 7000);
     }
   </script>
