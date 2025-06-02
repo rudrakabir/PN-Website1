@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog | Dr. Pallavi Narayan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Announcements | Dr. Pallavi Narayan</title>
   <style>
     * {
       box-sizing: border-box;
@@ -55,67 +55,59 @@
       width: 100%;
     }
 
-    .blog-container {
-      padding: 120px 40px 40px; /* Adjust padding for fixed nav */
-      max-width: 900px;
-      margin: 0 auto;
+    .announcement-section {
+      max-width: 700px;
+      margin: 140px auto 60px;
+      padding: 0 20px;
     }
 
-    .blog-container h1 {
-      font-size: 2.5em;
-      font-weight: 600;
-      margin-bottom: 40px;
-      text-align: center;
-      border-bottom: 1px solid #555;
-      padding-bottom: 20px;
+    .announcement-form textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      border: 1px solid #555;
+      border-radius: 5px;
+      background-color: #111;
+      color: #fff;
+      resize: none;
+      font-family: inherit;
+      font-size: 1em;
     }
 
-    .blog-post {
+    .announcement-form button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .announcement-form button:hover {
+      background-color: #ddd;
+    }
+
+    .announcement-feed {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column-reverse; /* Newest first */
+      gap: 20px;
+    }
+
+    .announcement {
       background-color: #111;
       border: 1px solid #333;
       border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 30px;
+      padding: 20px;
     }
 
-    .blog-post h2 {
-      font-size: 1.8em;
-      font-weight: 500;
+    .announcement time {
+      display: block;
+      font-size: 0.9em;
+      color: #aaa;
       margin-bottom: 10px;
-      color: #eee;
-    }
-
-    .blog-post .meta {
-      font-size: 0.9em;
-      color: #aaa;
-      margin-bottom: 15px;
-    }
-
-    .blog-post .excerpt p {
-      margin-bottom: 15px;
-      color: #ccc;
-    }
-
-    .blog-post .read-more {
-      display: inline-block;
-      color: #87CEEB; /* Light sky blue for links */
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    .blog-post .read-more:hover {
-      color: #add8e6; /* Lighter blue on hover */
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 0.9em;
-      color: #aaa;
-      border-top: 1px solid #333;
-      margin-top: 40px;
     }
   </style>
 </head>
@@ -130,41 +122,41 @@
     <a href="contact.html">Contact</a>
   </nav>
 
-  <div class="blog-container">
-    <h1>My Thoughts & Updates</h1>
+  <div class="announcement-section">
+    <!-- Owner-only form -->
+    <form class="announcement-form" id="announcementForm">
+      <textarea id="announcementText" placeholder="Write an announcement..."></textarea>
+      <button type="submit">Post</button>
+    </form>
 
-    <article class="blog-post">
-      <h2>Reflections on a Decade of Writing</h2>
-      <p class="meta">Published on <time datetime="2025-07-15">July 15, 2025</time></p>
-      <div class="excerpt">
-        <p>Looking back at the last ten years, the journey of writing has been one of profound discovery and evolution. Each project, from academic papers to artistic explorations, has shaped my perspective in unique ways...</p>
-      </div>
-      <a href="#" class="read-more">Read More →</a>
-    </article>
-
-    <article class="blog-post">
-      <h2>The Intersection of Art and Academia</h2>
-      <p class="meta">Published on <time datetime="2025-06-28">June 28, 2025</time></p>
-      <div class="excerpt">
-        <p>Many often ask how I navigate the worlds of art and academia. For me, they are not separate realms but rather intertwined paths that inform and enrich one another. This post explores some of these connections.</p>
-      </div>
-      <a href="#" class="read-more">Read More →</a>
-    </article>
-
-    <article class="blog-post">
-      <h2>Upcoming Workshop Announcement</h2>
-      <p class="meta">Published on <time datetime="2025-06-10">June 10, 2025</time></p>
-      <div class="excerpt">
-        <p>Excited to announce an upcoming workshop on creative writing and personal narrative development. Join me for an inspiring session aimed at unlocking your storytelling potential. More details to follow soon!</p>
-      </div>
-      <a href="#" class="read-more">Read More →</a>
-    </article>
-
+    <!-- Announcement feed -->
+    <div class="announcement-feed" id="announcementFeed">
+      <!-- JS-generated announcements appear here -->
+    </div>
   </div>
 
-  <footer>
-    © 2025 Pallavi Narayan. All rights reserved.
-  </footer>
+  <script>
+    const form = document.getElementById('announcementForm');
+    const textInput = document.getElementById('announcementText');
+    const feed = document.getElementById('announcementFeed');
 
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const text = textInput.value.trim();
+      if (text === '') return;
+
+      const now = new Date();
+      const dateString = now.toLocaleString();
+
+      const post = document.createElement('div');
+      post.className = 'announcement';
+      post.innerHTML = `
+        <time>${dateString}</time>
+        <p>${text}</p>
+      `;
+      feed.appendChild(post);
+      textInput.value = '';
+    });
+  </script>
 </body>
 </html>
