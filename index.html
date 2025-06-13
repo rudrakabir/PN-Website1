@@ -35,7 +35,7 @@
     nav a {
       color: #000;
       text-decoration: none;
-      font-size: 1em;
+      font-size: 1rem;
       font-weight: 500;
       position: relative;
     }
@@ -57,7 +57,7 @@
     .notice {
       background-color: #f0f0f0;
       color: #444;
-      font-size: 0.9em;
+      font-size: 0.9rem;
       text-align: center;
       padding: 8px 12px;
       position: sticky;
@@ -95,17 +95,18 @@
       z-index: 2;
       margin-bottom: 40px;
       padding: 0 1em;
+      max-width: 90%;
     }
 
     .hero h1 {
-      font-size: 3.5em;
+      font-size: 3.5vw;
       font-weight: 600;
       letter-spacing: 2px;
       margin-bottom: 0.5em;
     }
 
     .hero h2 {
-      font-size: 1.6em;
+      font-size: 1.6vw;
       font-weight: 300;
       display: flex;
       gap: 20px;
@@ -114,7 +115,7 @@
     }
 
     .hero h2 span {
-      font-size: 1.6em;
+      font-size: 1.6vw;
       font-weight: 300;
     }
 
@@ -131,11 +132,8 @@
     }
 
     .books-section h2 {
-      font-size: 3em;
+      font-size: 3vw;
       font-weight: 300;
-      display: flex;
-      gap: 20px;
-      justify-content: center;
       flex-wrap: wrap;
     }
 
@@ -145,17 +143,17 @@
       align-items: center;
       gap: 40px;
       flex-wrap: wrap;
-      flex-grow: 1;
       padding: 2em 0;
+      width: 100%;
     }
 
     .books-gallery img {
       max-height: 400px;
-      width: auto;
+      width: 100%;
+      max-width: 280px;
       border-radius: 10px;
       box-shadow: 0 12px 24px rgba(255,255,255,0.15);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      max-width: 100%;
       height: auto;
     }
 
@@ -166,13 +164,13 @@
 
     footer {
       text-align: center;
-      font-size: 0.9em;
+      font-size: 0.9rem;
       color: #ccc;
       background: transparent;
       padding: 10px 0;
     }
 
-    /* Responsive styles */
+    /* Responsive tweaks for small screens */
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
@@ -181,22 +179,18 @@
       }
 
       .hero {
-        padding-top: 80px;
         align-items: center;
+        padding-top: 80px;
         background-position: center top;
       }
 
       .hero h1 {
-        font-size: 2.2em;
+        font-size: 2em;
       }
 
-      .hero h2 {
-        font-size: 1.2em;
-        gap: 10px;
-      }
-
+      .hero h2,
       .hero h2 span {
-        font-size: 1.2em;
+        font-size: 1em;
       }
 
       .books-section {
@@ -204,8 +198,7 @@
       }
 
       .books-section h2 {
-        font-size: 2em;
-        text-align: center;
+        font-size: 1.8em;
       }
 
       .books-gallery {
@@ -214,7 +207,8 @@
       }
 
       .books-gallery img {
-        max-height: 300px;
+        max-height: 280px;
+        max-width: 90%;
       }
     }
   </style>
@@ -261,3 +255,4 @@
   </section>
 </body>
 </html>
+
