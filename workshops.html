@@ -1,197 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Workshops | Pallavi Narayan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshops | Dr. Pallavi Narayan</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'Georgia', serif;
-      background: white;
-      color: black;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      padding: 0;
     }
 
-    header {
-      background-color: white;
-      padding: 1em;
-      text-align: center;
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #fff;
+      color: #000;
+      overflow-x: hidden;
     }
 
     nav {
-      font-family: 'Georgia', serif;
-      font-size: 1em;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 20px;
+      background-color: #f7f7f7;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
     }
 
     nav a {
-      margin: 0 1.5em;
+      color: #000;
       text-decoration: none;
-      color: black;
+      font-size: 1em;
+      font-weight: 500;
+      position: relative;
     }
 
-    nav a:hover {
-      color: #555;
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: width 0.3s;
+      margin: 5px auto 0;
     }
 
-    .gallery-wrapper {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: start;
-      padding-top: 4em;
-      padding-bottom: 2em;
-      box-sizing: border-box;
+    nav a:hover::after {
+      width: 100%;
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+    main {
+      padding-top: 120px;
+      padding-bottom: 60px;
       width: 100%;
       max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
-    .gallery-item {
+    .grid-title {
+      font-size: 2em;
+      font-weight: 400;
+      margin: 60px 0 20px;
+      text-align: center;
+    }
+
+    .workshop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .grid-item {
       background-color: #f4f4f4;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      cursor: pointer;
       height: 250px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
-    .gallery-item img {
+    .grid-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background: white;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #ccc;
+      background: transparent;
+      padding: 20px 0;
     }
 
-    .modal-content {
-      max-width: 80%;
-      max-height: 80vh;
-      object-fit: contain;
-    }
+    @media (max-width: 768px) {
+      .grid-title {
+        font-size: 1.5em;
+      }
 
-    .close-btn, .arrow-btn {
-      position: absolute;
-      background: none;
-      border: none;
-      color: black;
-      font-size: 2em;
-      font-family: 'Georgia', serif;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    .close-btn {
-      top: 20px;
-      right: 30px;
-    }
-
-    .arrow-btn.left {
-      left: 30px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .arrow-btn.right {
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
+      .grid-item {
+        height: 200px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="publications.html">Publications</a>
-      <a href="artworks.html">Artworks</a>
-      <a href="editorialservices.html">Editorial Services</a>
-      <a href="workshops.html">Workshops</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="artworks.html">Artworks</a>
+    <a href="editorialservices.html">Editorial Services</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-  <div class="gallery-wrapper">
-    <div class="gallery">
-      <!-- Block 1 with preview image -->
-      <div class="gallery-item" onclick="openModal('block1', 0)">
-        <img src="1.png" alt="Workshop Preview 1">
-      </div>
-
-      <!-- Remaining empty blocks -->
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
+  <main>
+    <div class="grid-title">Previous Workshops</div>
+    <div class="workshop-grid">
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
     </div>
-  </div>
 
-  <!-- Modal for Block 1 -->
-  <div id="modal-block1" class="modal">
-    <button class="close-btn" onclick="closeModal('modal-block1')">&times;</button>
-    <button class="arrow-btn left" onclick="prevImage('block1')">&#10094;</button>
-    <img id="modal-image-block1" class="modal-content" src="1.png" />
-    <button class="arrow-btn right" onclick="nextImage('block1')">&#10095;</button>
-  </div>
+    <div class="grid-title">Upcoming Workshops</div>
+    <div class="workshop-grid">
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+    </div>
+  </main>
 
-  <script>
-    const imageSets = {
-      block1: ["1.png", "2.png", "3.png"]
-    };
-
-    let currentImageIndex = {
-      block1: 0
-    };
-
-    function openModal(block, index) {
-      currentImageIndex[block] = index;
-      const modal = document.getElementById("modal-" + block);
-      const image = document.getElementById("modal-image-" + block);
-      image.src = imageSets[block][index];
-      modal.style.display = "flex";
-    }
-
-    function closeModal(modalId) {
-      document.getElementById(modalId).style.display = "none";
-    }
-
-    function nextImage(block) {
-      currentImageIndex[block] = (currentImageIndex[block] + 1) % imageSets[block].length;
-      document.getElementById("modal-image-" + block).src = imageSets[block][currentImageIndex[block]];
-    }
-
-    function prevImage(block) {
-      currentImageIndex[block] = (currentImageIndex[block] - 1 + imageSets[block].length) % imageSets[block].length;
-      document.getElementById("modal-image-" + block).src = imageSets[block][currentImageIndex[block]];
-    }
-  </script>
+  <footer>
+    © 2025 Pallavi Narayan. All rights reserved.
+  </footer>
 </body>
 </html>
+
+
+
 
 
 
