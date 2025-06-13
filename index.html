@@ -63,7 +63,6 @@
       padding-top: 100px;
       background: url('Screenshot 2025-05-13 at 16.50.52.png') no-repeat center 30%;
       background-size: cover;
-      background-repeat: no-repeat;
       position: relative;
       color: #fff;
     }
@@ -83,6 +82,7 @@
       position: relative;
       z-index: 2;
       margin-bottom: 40px;
+      padding: 0 1em;
     }
 
     .hero h1 {
@@ -107,7 +107,7 @@
     }
 
     .books-section {
-      height: 100vh;
+      min-height: 100vh;
       padding: 6em 2em 1em;
       text-align: center;
       background-color: #000;
@@ -119,9 +119,12 @@
     }
 
     .books-section h2 {
-      font-size: 2em;
-      font-weight: 600;
-      color: #fff;
+      font-size: 3em;
+      font-weight: 300;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .books-gallery {
@@ -135,11 +138,13 @@
     }
 
     .books-gallery img {
-      height: 400px;
+      max-height: 400px;
       width: auto;
       border-radius: 10px;
       box-shadow: 0 12px 24px rgba(255,255,255,0.15);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 100%;
+      height: auto;
     }
 
     .books-gallery img:hover {
@@ -153,6 +158,52 @@
       color: #ccc;
       background: transparent;
       padding: 10px 0;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .hero {
+        padding-top: 80px;
+        align-items: center;
+        background-position: center top;
+      }
+
+      .hero h1 {
+        font-size: 2.2em;
+      }
+
+      .hero h2 {
+        font-size: 1.2em;
+        gap: 10px;
+      }
+
+      .hero h2 span {
+        font-size: 1.2em;
+      }
+
+      .books-section {
+        padding: 4em 1em 2em;
+      }
+
+      .books-section h2 {
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .books-gallery {
+        gap: 20px;
+        flex-direction: column;
+      }
+
+      .books-gallery img {
+        max-height: 300px;
+      }
     }
   </style>
 </head>
@@ -179,7 +230,7 @@
   </section>
 
   <section class="books-section">
-    <h2 style="font-size: 3em; font-weight: 300; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">My Books</h2>
+    <h2>My Books</h2>
     <div class="books-gallery">
       <a href="https://www.amazon.in/Pamuks-Istanbul-Self-Pallavi-Narayan/dp/1032425334" target="_blank">
         <img src="9780367760649.jpg" alt="Pamuk's Istanbul Cover">
