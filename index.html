@@ -38,6 +38,7 @@
       font-size: 1rem;
       font-weight: 500;
       position: relative;
+      white-space: nowrap;
     }
 
     nav a::after {
@@ -170,12 +171,18 @@
       padding: 10px 0;
     }
 
-    /* Responsive tweaks for small screens */
+    /* Responsive tweaks */
     @media (max-width: 768px) {
       nav {
-        flex-direction: column;
-        gap: 12px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
         padding: 12px;
+      }
+
+      nav a {
+        font-size: 0.95rem;
+        flex-shrink: 0;
       }
 
       .hero {
@@ -255,4 +262,5 @@
   </section>
 </body>
 </html>
+
 
