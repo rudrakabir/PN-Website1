@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonials | Dr. Pallavi Narayan</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+      padding-top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 20px;
+      background-color: #f7f7f7;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #000;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: width 0.3s;
+      margin: 5px auto 0;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .box-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 60px;
+      padding: 40px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .box {
+      background-color: #f7f7f7;
+      color: #000;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.4em;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      width: 40vw;
+      height: 40vw;
+      max-width: 400px;
+      max-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .box-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .box {
+        width: 80vw;
+        height: 80vw;
+        max-width: none;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="artworks.html">Artworks</a>
+    <a href="editorialservices.html">Editorial Services</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="box-container">
+    <a href="workshop-course-testimonials.html" class="box">Workshop/Course Testimonials</a>
+    <a href="editorial-testimonials.html" class="box">Editorial Testimonials</a>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
