@@ -1,14 +1,13 @@
-<!-- Full rewritten version of Publications page with simplified 'Papers' section -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Publications | Dr. Pallavi Narayan</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Helvetica Neue', sans-serif;
+      font-family: 'Georgia', serif;
       background-color: #000;
       color: #fff;
       overflow-x: hidden;
@@ -19,8 +18,7 @@
       flex-wrap: wrap;
       gap: 24px;
       padding: 20px;
-      background-color: #f7f7f7;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      background-color: #fff;
       position: fixed;
       width: 100%;
       top: 0;
@@ -29,25 +27,26 @@
     nav a {
       color: #000;
       text-decoration: none;
-      font-size: 1em;
+      font-size: 1rem;
       font-weight: 500;
-      position: relative;
     }
-    nav a::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 2px;
-      background: #000;
-      transition: width 0.3s;
-      margin: 5px auto 0;
+    .banner {
+      background-color: #f0f0f0;
+      color: #444;
+      text-align: center;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      position: fixed;
+      top: 64px;
+      width: 100%;
+      z-index: 9;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
-    nav a:hover::after { width: 100%; }
     .container {
       display: flex;
       justify-content: space-between;
       align-items: stretch;
-      padding: 120px 40px 40px;
+      padding: 160px 40px 40px;
       height: calc(100vh - 80px);
     }
     .pub-list {
@@ -93,6 +92,30 @@
       object-fit: cover;
       border-radius: 8px;
     }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+      background: transparent;
+      padding: 10px 0;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 160px 20px 40px;
+        height: auto;
+      }
+      .pub-list,
+      .pub-image {
+        width: 100%;
+      }
+      .pub-list { padding-right: 0; }
+      .pub-image {
+        margin-top: 30px;
+        justify-content: center;
+      }
+      .pub-image img { max-width: 90%; }
+    }
   </style>
 </head>
 <body>
@@ -102,8 +125,12 @@
     <a href="artworks.html">Artworks</a>
     <a href="editorialservices.html">Editorial Services</a>
     <a href="workshops.html">Workshops</a>
+    <a href="testimonials.html">Testimonials</a>
     <a href="contact.html">Contact</a>
   </nav>
+  <div class="banner">
+    This website is currently a work in progress. Thank you for your patience.
+  </div>
   <div class="container">
     <div class="pub-list">
       <h3 onclick="toggleSection('books')">Books</h3>
@@ -113,19 +140,17 @@
         <a href="https://www.amazon.com/Singapore-At-Home-Across-Lines/dp/9811480451">Singapore at Home (Amazon US)</a>
         <a href="https://www.amazon.in/Singapore-At-Home-Across-Lines-ebook/dp/B097D7WDN3">Singapore at Home (Kindle)</a>
       </div>
-
       <h3 onclick="toggleSection('papers')">Papers</h3>
       <div id="papers" class="sub-list">
         <span>2025. The Flâneuse in Turkish and Indian Fiction: Urban Inequality and Female Migrants. Urban Matters. Forthcoming July.</span>
-        <a href="https://muse.jhu.edu/pub/303/article/942138/pdf">2024. Shifting the Focus: World Literature Decentred by Ian Almond. Journal of Mediterranean Studies</a>
-        <a href="https://www.tandfonline.com/doi/full/10.1080/00049182.2022.2052556">2022. Editorial Introduction: Geography and Collective Memories through Art. Australian Geographer</a>
-        <a href="https://www.academia.edu/49100034/Resting_in_the_Met_Constructions_of_Homelike_Spaces_in_Christine_Coulson_s_Metropolitan_Stories">2021. Resting in the Met: Metropolitan Stories. Museologia e Interdisciplinaridade</a>
-        <a href="https://www.idea.org.tr/gender-domesticspace-novelsolddelhi">2021. Gender and Domestic Space in Ahmed Ali’s and Krishna Sobti’s Novels. IDEAS Journal</a>
+        <a href="https://muse.jhu.edu/pub/303/article/942138/pdf">2024. Shifting the Focus: World Literature Decentred by Ian Almond</a>
+        <a href="https://www.tandfonline.com/doi/full/10.1080/00049182.2022.2052556">2022. Editorial Introduction: Geography and Collective Memories through Art</a>
+        <a href="https://www.academia.edu/49100034/Resting_in_the_Met_Constructions_of_Homelike_Spaces_in_Christine_Coulson_s_Metropolitan_Stories">2021. Resting in the Met: Metropolitan Stories</a>
+        <a href="https://www.idea.org.tr/gender-domesticspace-novelsolddelhi">2021. Gender and Domestic Space in Ahmed Ali’s and Krishna Sobti’s Novels</a>
         <a href="https://ghi2021.web.nycu.edu.tw/2021/01/07/documenting-visibility-representation-and-exclusion-across-borders/">2021. Documenting Visibility: Representation and Exclusion Across Borders</a>
         <a href="https://cjdproject.web.nycu.edu.tw/wp-content/uploads/sites/167/2020/12/Narayan_2020_Decolonizing-the-Museum-Space-in-India.pdf">2021. Decolonizing the Museum Space in India: The Pandemic Influence</a>
         <span>2013. Magical Objects: Visiting Orhan Pamuk’s Museum of Innocence. Literary Paritantra</span>
       </div>
-
       <h3 onclick="toggleSection('articles')">Articles</h3>
       <div id="articles" class="sub-list">
         <a href="https://scroll.in/article/963207/passing-the-pandemic-with-pamuk-how-to-travel-the-world-from-one-room-during-the-lockdown">Passing the Pandemic with Pamuk</a>
@@ -136,7 +161,6 @@
         <a href="https://www.esplanade.com/offstage/arts/leela-samson-guru-of-quiet-transformations">Leela Samson</a>
         <a href="https://www.academia.edu/40333582/The_Museum_of_Innocence_in_Istanbul_Real_Objects_and_Fictional_Lives">Museum of Innocence</a>
       </div>
-
       <h3 onclick="toggleSection('interviews')">Interviews and Reviews</h3>
       <div id="interviews" class="sub-list">
         <a href="https://www.academia.edu/128441356/The_Sublime_in_the_Subliminal">The Sublime in the Subliminal</a>
@@ -146,20 +170,17 @@
         <a href="http://qlrs.com/critique.asp?id=1847">Eve and the Lost Ghost Family</a>
         <a href="https://www.newindianexpress.com/lifestyle/books/2021/Dec/26/interview-covid-19-pandemic-proved-how-little-we-need-to-live-author-siddharth-shanghvi-2399032.html">Interview: Siddharth Dhanvant Shanghvi</a>
       </div>
-
       <h3 onclick="toggleSection('shortstories')">Short Stories</h3>
       <div id="shortstories" class="sub-list">
         <a href="https://www.amazon.com/42-Stories-Anthology-Presents-Book/dp/1990589243">Ultimate Rendezvous in Bed</a>
         <a href="https://www.academia.edu/116345194/Red_and_Gold_A_Literary_Fiasco">Red and Gold</a>
         <a href="https://boundindia.com/walking-talking-a-personal-essay/">Walking, Talking</a>
       </div>
-
       <h3 onclick="toggleSection('poetry')">Poetry</h3>
       <div id="poetry" class="sub-list">
         <a href="https://www.academia.edu/128441162/_A_Jonker_Carriage_and_Malacca_Night_Market_">Malacca Night Market</a>
         <a href="http://kitaab.org/2020/06/04/poetry-peace-by-pallavi-narayan/">Peace</a>
       </div>
-
       <h3 onclick="toggleSection('fellowships')">Fellowships</h3>
       <div id="fellowships" class="sub-list">
         <a href="https://www.singlitstation.com/fellowship">Jalan Besar Writing Fellow</a>
@@ -169,19 +190,33 @@
       </div>
     </div>
     <div class="pub-image">
-      <img src="publications.png" alt="Dr. Pallavi Narayan">
+      <img src="publications.png" alt="Dr. Pallavi Narayan" />
     </div>
   </div>
+  <footer>
+    © 2025 Pallavi Narayan. All rights reserved.
+  </footer>
   <script>
     function toggleSection(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.classList.toggle('show');
+      const lists = document.querySelectorAll('.sub-list');
+      lists.forEach(list => {
+        if (list.id !== id) {
+          list.classList.remove('show');
+        }
+      });
+      const target = document.getElementById(id);
+      if (target) {
+        target.classList.toggle('show');
       }
     }
   </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
