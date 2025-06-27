@@ -3,251 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home | Dr. Pallavi Narayan</title>
+  <title>Home | Dr Pallavi Narayan</title>
+
+  <!-- ------------  CORE STYLES  ------------ -->
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Georgia', serif;
-      background-color: #fff;
-      color: #000;
-      overflow-x: hidden;
+      font-family: Georgia, serif;
+      background:#fff;
+      color:#000;
+      overflow-x:hidden;
     }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      padding: 20px;
-      background-color: #fff;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 10;
+    /* ----------  FIXED HEADER  ---------- */
+    header{
+      position:fixed;
+      top:0; left:0; width:100%;
+      z-index:10;
+      background:#fff;
+      box-shadow:0 1px 3px rgba(0,0,0,.05);
     }
 
-    nav a {
-      color: #000;
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 500;
-    }
+      nav{
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:24px;
+        padding:20px 12px;
+      }
+        nav a{
+          text-decoration:none;
+          font-size:1rem;
+          font-weight:500;
+          color:#000;
+        }
 
-    .banner {
-      background-color: #f0f0f0;
-      color: #444;
-      text-align: center;
-      padding: 8px 12px;
-      font-size: 0.9rem;
-      position: fixed;
-      top: 64px;
-      width: 100%;
-      z-index: 9;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .hero-split {
-      display: flex;
-      height: 100vh;
-      margin-top: 104px;
-      overflow: hidden;
-    }
-
-    .hero-text {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      overflow: hidden;
-    }
-
-    .hero-text-scrollbox {
-      max-width: 620px;
-      height: 80vh;
-      overflow-y: auto;
-      padding-right: 10px;
-    }
-
-    .hero-text-scrollbox h1 {
-      font-size: 3.2rem;
-      text-align: center;
-      margin-bottom: 0.2em;
-    }
-
-    .hero-text-scrollbox h2 {
-      font-size: 1.3rem;
-      font-weight: normal;
-      text-align: center;
-      color: #666;
-      margin-bottom: 1.5em;
-    }
-
-    .hero-text-scrollbox p {
-      text-indent: 2em;
-      line-height: 1.7;
-      margin-bottom: 0;
-    }
-
-    .hero-image {
-      flex: 1;
-      background: url('Screenshot 2025-05-13 at 16.50.52.png') no-repeat left center;
-      background-size: cover;
-    }
-
-    .books-section {
-      min-height: 100vh;
-      padding: 6em 2em 1em;
-      text-align: center;
-      background-color: #000;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      color: #fff;
-    }
-
-    .books-section h2 {
-      font-size: 3vw;
-      font-weight: 300;
-    }
-
-    .books-gallery {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      padding: 2em 0;
-      width: 100%;
-    }
-
-    .books-gallery img {
-      max-height: 400px;
-      width: 100%;
-      max-width: 280px;
-      border-radius: 10px;
-      box-shadow: 0 12px 24px rgba(255,255,255,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      height: auto;
-    }
-
-    .books-gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 16px 32px rgba(255,255,255,0.2);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #ccc;
-      background: transparent;
-      padding: 10px 0;
-    }
-
-    @media (max-width: 768px) {
-      .hero-split {
-        flex-direction: column;
-        height: auto;
+      .banner{
+        background:#f0f0f0;
+        color:#444;
+        font-size:.9rem;
+        text-align:center;
+        padding:6px 10px;
       }
 
-      .hero-image {
-        height: 50vh;
-        background-position: center top;
+    /* ----------  HERO (split)  ---------- */
+    .hero-split{
+      display:flex;
+      min-height:100vh;
+      margin-top:var(--header-height);
+      overflow:hidden;
+    }
+
+      .hero-text{
+        flex:1;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:40px;
+      }
+        .scrollbox{
+          max-width:620px;
+          max-height:80vh;
+          overflow-y:auto;
+        }
+          .scrollbox h1{
+            font-size:3.2rem;
+            text-align:center;
+            margin-bottom:.2em;
+          }
+          .scrollbox h2{
+            font-size:1.3rem;
+            font-weight:normal;
+            text-align:center;
+            color:#666;
+            margin-bottom:1.5em;
+          }
+          .scrollbox p{
+            text-indent:2em;
+            line-height:1.7;
+            margin-bottom:0;
+          }
+
+      .hero-image{
+        flex:1;
+        background:url('Screenshot 2025-05-13 at 16.50.52.png') no-repeat left center / cover;
       }
 
-      .hero-text {
-        padding: 20px;
-        height: auto;
+    /* ----------  BOOKS SECTION  ---------- */
+    .books{
+      min-height:100vh;
+      padding:6em 2em 1em;
+      background:#000;
+      color:#fff;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+      .books h2{
+        font-size:3vw;
+        font-weight:300;
+      }
+      .gallery{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        align-items:center;
+        gap:40px;
+        padding:2em 0;
+        width:100%;
+      }
+        .gallery img{
+          width:100%;
+          max-width:280px;
+          max-height:400px;
+          border-radius:10px;
+          height:auto;
+          box-shadow:0 12px 24px rgba(255,255,255,.15);
+          transition:transform .3s ease, box-shadow .3s ease;
+        }
+        .gallery img:hover{
+          transform:scale(1.05);
+          box-shadow:0 16px 32px rgba(255,255,255,.20);
+        }
+
+    footer{
+      font-size:.9rem;
+      color:#ccc;
+      text-align:center;
+      padding:10px 0;
+      background:transparent;
+    }
+
+    /* ----------  MOBILE OVERRIDES  ---------- */
+    @media (max-width:768px){
+      :root{
+        /* nav wraps into 2 lines (~55-60 px each) + banner (~28 px) */
+        --header-height:140px;
       }
 
-      .hero-text-scrollbox {
-        max-height: none;
-        height: auto;
+      .hero-split{
+        flex-direction:column;
+        min-height:auto;
       }
+        .hero-text{ padding:22px 20px; }
+          .scrollbox{
+            max-height:none;
+            overflow-y:visible;
+          }
+            .scrollbox h1{
+              font-size:2.4rem;
+              margin-top:0;
+            }
+            .scrollbox h2{ font-size:1.05rem; }
 
-      .hero-text-scrollbox h1 {
-        font-size: 2.2rem;
-      }
+        .hero-image{
+          height:45vh;
+          background-position:center top;
+        }
 
-      .hero-text-scrollbox h2 {
-        font-size: 1.1rem;
+      .books{
+        padding:4em 1em 2em;
       }
+        .books h2{ font-size:1.8em; }
+        .gallery{
+          flex-direction:column;
+          gap:20px;
+        }
+          .gallery img{
+            max-width:90%;
+            max-height:280px;
+          }
+    }
 
-      .books-section {
-        padding: 4em 1em 2em;
-      }
-
-      .books-section h2 {
-        font-size: 1.8em;
-      }
-
-      .books-gallery {
-        gap: 20px;
-        flex-direction: column;
-      }
-
-      .books-gallery img {
-        max-height: 280px;
-        max-width: 90%;
-      }
+    /* ----------  DESKTOP HEADER HEIGHT  ---------- */
+    @media (min-width:769px){
+      :root{ --header-height:104px; } /* nav (1 row) + banner */
     }
   </style>
 </head>
+
 <body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="publications.html">Publications</a>
-    <a href="artworks.html">Artworks</a>
-    <a href="editorialservices.html">Editorial Services</a>
-    <a href="workshops.html">Workshops</a>
-    <a href="testimonials.html">Testimonials</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <!-- ----------  HEADER (fixed)  ---------- -->
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="publications.html">Publications</a>
+      <a href="artworks.html">Artworks</a>
+      <a href="editorialservices.html">Editorial&nbsp;Services</a>
+      <a href="workshops.html">Workshops</a>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="banner">This website is currently a work in progress. Thank you for your patience.</div>
+  </header>
 
-  <div class="banner">
-    This website is currently a work in progress. Thank you for your patience.
-  </div>
-
+  <!-- ----------  HERO  ---------- -->
   <section class="hero-split">
     <div class="hero-text">
-      <div class="hero-text-scrollbox">
-        <h1>Pallavi Narayan</h1>
-        <h2>Author | Educator | Editor | Cultural Curator</h2>
+      <div class="scrollbox">
+        <h1>Pallavi&nbsp;Narayan</h1>
+        <h2>Author&nbsp;| Educator&nbsp;| Editor&nbsp;| Cultural&nbsp;Curator</h2>
 
         <p>Welcome to the official website of Dr Pallavi Narayan—a recognized name in global publishing, literary scholarship, and cross-cultural dialogue.</p>
-        <p>With over 17 years of experience spanning higher education, trade and academic publishing, and international cultural exchange, Pallavi offers a powerful blend of editorial expertise and thought leadership. She collaborates with writers, universities, and organizations worldwide, offering editorial services, writing workshops, and academic and literary coaching designed to elevate voices and shape narratives that matter.</p>
-        <p>A PhD from IIT Delhi, Pallavi has taught and mentored over 1,500 students and delivered lectures at prestigious institutions including the National University of Singapore, University of California Santa Barbara, Ahmedabad University, IIT Delhi, KRVIA, and Symbiosis International University. She’s spoken at more than 60 high-impact literary and academic events around the world.</p>
+        <p>With over 17&nbsp;years of experience spanning higher education, trade and academic publishing, and international cultural exchange, Pallavi offers a powerful blend of editorial expertise and thought leadership. She collaborates with writers, universities, and organizations worldwide, offering editorial services, writing workshops, and academic and literary coaching designed to elevate voices and shape narratives that matter.</p>
+        <p>A PhD from IIT Delhi, Pallavi has taught and mentored over 1 500 students and delivered lectures at prestigious institutions including the National University of Singapore, University of California Santa Barbara, Ahmedabad University, IIT Delhi, KRVIA, and Symbiosis International University. She’s spoken at more than 60 high-impact literary and academic events around the world.</p>
         <p>Pallavi’s editorial credentials include senior roles at top-tier publishers such as Penguin Random House, Pan Macmillan, Routledge, NUS Press, and NTU Singapore. She made history as Singapore’s first Frankfurt Fellow at the renowned Frankfurt Book Fair.</p>
         <p>As an author, her critically acclaimed monograph <em>Pamuk’s Istanbul: The Self and the City</em> (Routledge 2022; South Asia edition 2023) received praise from Nobel laureate Orhan Pamuk and his translator, Erdağ Göknar, as well as distinguished scholars Ian Almond and Mehnaz M. Afridi. Her co-edited anthology <em>Singapore at Home: Life across Lines</em> (Kitaab 2021), a featured title at the Singapore Writers Festival and recognized by <em>The Straits Times</em> as essential Singaporean fiction, was also endorsed by some of Singapore’s finest writers, including Alvin Pang, Cyril Wong, and Felix Cheong.</p>
         <p>Her work has been honored by fellowships from the Global Asia: Mobilities and Arts Lab’s Doha Writing Retreat, the CHCI-Mellon Global Humanities Institutes in Chile and Taiwan, South Asia Speaks, Koç University Center for Asian Studies, and Singapore’s Jalan Besar Fellowship.</p>
-        <p>Whether you’re looking for incisive editorial guidance, dynamic literary mentorship, or an experienced voice in global storytelling—you’re in the right place.</p>
+        <p>Whether you’re looking for incisive editorial guidance, dynamic literary mentorship, or an experienced voice in global storytelling—​you’re in the right place.</p>
       </div>
     </div>
     <div class="hero-image"></div>
   </section>
 
-  <section class="books-section">
+  <!-- ----------  BOOKS  ---------- -->
+  <section class="books">
     <h2>My Books</h2>
-    <div class="books-gallery">
+
+    <div class="gallery">
       <a href="https://www.amazon.in/Pamuks-Istanbul-Self-Pallavi-Narayan/dp/1032425334" target="_blank">
-        <img src="9780367760649.jpg" alt="Pamuk's Istanbul Cover">
+        <img src="9780367760649.jpg" alt="Pamuk's Istanbul — book cover">
       </a>
+
       <a href="https://www.amazon.com/Singapore-At-Home-Across-Lines/dp/9811480451" target="_blank">
-        <img src="61z-Pjv-kiS._SL1040_.jpg" alt="Singapore at Home Cover">
+        <img src="61z-Pjv-kiS._SL1040_.jpg" alt="Singapore at Home — book cover">
       </a>
     </div>
-    <footer>
-      © 2025 Pallavi Narayan. All rights reserved.
-    </footer>
+
+    <footer>© 2025 Pallavi Narayan. All rights reserved.</footer>
   </section>
 </body>
 </html>
+
 
 
 
