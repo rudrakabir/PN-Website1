@@ -6,45 +6,36 @@
   <title>Contact | Dr. Pallavi Narayan</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Helvetica Neue', sans-serif;
+      font-family: 'Georgia', serif;
       background-color: #000;
       color: #fff;
       height: 100vh;
-      overflow: hidden; /* Consider  v changing to 'auto' or 'scroll' if content might overflow */
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
+
     nav {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 24px;
       padding: 20px;
-      background-color: #f7f7f7;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      background-color: #fff;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 10;
     }
+
     nav a {
       color: #000;
       text-decoration: none;
-      font-size: 1em;
+      font-size: 1rem;
       font-weight: 500;
-      position: relative;
     }
-    nav a::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 2px;
-      background: #000;
-      transition: width 0.3s;
-      margin: 5px auto 0;
-    }
-    nav a:hover::after { width: 100%; }
 
     .container {
       flex-grow: 1;
@@ -52,16 +43,18 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-top: 80px; /* Increased to account for fixed nav height */
-      padding-bottom: 20px; /* Added some bottom padding */
+      padding-top: 80px;
+      padding-bottom: 20px;
       text-align: center;
-      overflow-y: auto; /* Allow scrolling if content overflows */
+      overflow-y: auto;
     }
+
     .heading {
       font-size: 2em;
       margin-bottom: 30px;
       color: #fff;
     }
+
     .contact-form {
       display: flex;
       flex-direction: column;
@@ -69,9 +62,10 @@
       justify-content: center;
       width: 100%;
       max-width: 600px;
-      padding: 0 20px; /* Add horizontal padding for smaller screens */
+      padding: 0 20px;
       gap: 20px;
     }
+
     .contact-form input,
     .contact-form textarea {
       width: 100%;
@@ -80,39 +74,41 @@
       background: #111;
       color: #fff;
       font-size: 16px;
-      border-radius: 4px; /* Optional: slight rounding */
+      border-radius: 4px;
     }
+
     .contact-form textarea {
       height: 160px;
-      resize: vertical; /* Allow vertical resize, disable horizontal */
+      resize: vertical;
     }
+
     .contact-form button {
       width: 100%;
       padding: 14px;
       border: 1px solid #fff;
-      background-color: #fff; /* Changed for better contrast/visibility */
-      color: #000;           /* Changed for better contrast/visibility */
+      background-color: #fff;
+      color: #000;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 4px; /* Optional: slight rounding */
+      border-radius: 4px;
       transition: background-color 0.3s, color 0.3s;
     }
+
     .contact-form button:hover {
-        background-color: #333;
-        color: #fff;
-        border-color: #333;
+      background-color: #333;
+      color: #fff;
+      border-color: #333;
     }
 
-    /* Basic success message styling (optional, Netlify has default) */
     .form-success-message {
-        color: #28a745; /* Green for success */
-        background-color: #e9f7ef;
-        border: 1px solid #a1e0b6;
-        padding: 15px;
-        margin-top: 20px;
-        border-radius: 4px;
-        text-align: left;
+      color: #28a745;
+      background-color: #e9f7ef;
+      border: 1px solid #a1e0b6;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 4px;
+      text-align: left;
     }
   </style>
 </head>
@@ -123,86 +119,64 @@
     <a href="artworks.html">Artworks</a>
     <a href="editorialservices.html">Editorial Services</a>
     <a href="workshops.html">Workshops</a>
+    <a href="testimonials.html">Testimonials</a>
     <a href="contact.html">Contact</a>
   </nav>
 
   <div class="container">
     <div class="heading">Get in Touch</div>
-    <!--
-      Key changes for Netlify Forms:
-      1. Removed: action="mailto:..."
-      2. Removed: enctype="text/plain"
-      3. Added: data-netlify="true"
-      4. Added: name="contact" to the form (good practice)
-      5. Kept: method="POST"
-    -->
     <form class="contact-form" name="contact" method="POST" data-netlify="true">
-      <!-- Optional: Add a hidden field for Netlify to properly name the form if 'name' on form tag isn't enough -->
       <input type="hidden" name="form-name" value="contact" />
-
       <input type="text" name="Name" placeholder="Your Name" required>
       <input type="email" name="Email" placeholder="Your Email" required>
       <textarea name="Message" placeholder="Your Message" required></textarea>
       <button type="submit">Send</button>
     </form>
-
-    <!-- You can also specify a custom success page: -->
-    <!-- <form class="contact-form" name="contact" method="POST" data-netlify="true" action="/thank-you.html"> -->
-    <!-- ... rest of form ... -->
-    <!-- </form> -->
-    <!-- Then create a thank-you.html page -->
-
   </div>
 
   <script>
     const form = document.querySelector('.contact-form');
     if (form) {
-        form.addEventListener('submit', handleSubmit);
+      form.addEventListener('submit', handleSubmit);
     }
 
     async function handleSubmit(event) {
-        event.preventDefault();
+      event.preventDefault();
+      const status = document.createElement('p');
+      status.classList.add('form-status-message');
+      const existingStatus = form.parentNode.querySelector('.form-status-message');
+      if (existingStatus) existingStatus.remove();
+      form.parentNode.insertBefore(status, form.nextSibling);
 
-        const status = document.createElement('p');
-        status.classList.add('form-status-message');
-        const existingStatus = form.parentNode.querySelector('.form-status-message');
-        if (existingStatus) {
-            existingStatus.remove(); // Remove previous status message
+      const formData = new FormData(event.target);
+      try {
+        const response = await fetch(event.target.action || window.location.pathname, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
+        });
+
+        if (response.ok) {
+          status.textContent = "Thanks for your message! I'll get back to you soon.";
+          status.style.color = 'lightgreen';
+          form.reset();
+        } else {
+          const errorText = await response.text();
+          status.textContent = `Oops! There was a problem. Server says: ${response.status} ${response.statusText}.`;
+          status.style.color = 'lightcoral';
+          console.error("Form submission error details:", errorText);
         }
-        form.parentNode.insertBefore(status, form.nextSibling);
+      } catch (error) {
+        status.textContent = 'Oops! There was a network error.';
+        status.style.color = 'lightcoral';
+        console.error("Network error:", error);
+      }
 
-        const formData = new FormData(event.target);
-        
-        try {
-            // ***** THIS IS THE KEY CHANGE *****
-            const response = await fetch(event.target.action || window.location.pathname, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
-            });
-
-            if (response.ok) {
-                status.textContent = "Thanks for your message! I'll get back to you soon.";
-                status.style.color = 'lightgreen';
-                form.reset();
-            } else {
-                const errorText = await response.text(); // Get the actual error text
-                status.textContent = `Oops! There was a problem submitting your form. Server response: ${response.status} ${response.statusText}. Details: ${errorText}`;
-                status.style.color = 'lightcoral';
-                console.error("Form submission error details:", errorText); // Log the full HTML error for debugging
-            }
-        } catch (error) {
-            status.textContent = 'Oops! There was a network error submitting your form.';
-            status.style.color = 'lightcoral';
-            console.error("Network error:", error);
-        }
-
-        setTimeout(() => {
-            if (status.parentNode) { // Check if status is still in DOM
-                status.remove();
-            }
-        }, 7000);
+      setTimeout(() => {
+        if (status.parentNode) status.remove();
+      }, 7000);
     }
   </script>
 </body>
 </html>
+
