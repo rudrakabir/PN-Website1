@@ -44,33 +44,31 @@
     }
     .container {
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
-      align-items: stretch;
+      align-items: flex-start;
       padding: 160px 40px 40px;
-      height: calc(100vh - 80px);
     }
     .pub-list {
       width: 50%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       gap: 24px;
       padding-right: 40px;
-      overflow-y: auto;
     }
-    .pub-list h3 {
+    .toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 1.6em;
       font-weight: 400;
-      border-bottom: 1px solid #777;
-      padding-bottom: 16px;
-      cursor: pointer;
     }
     .sub-list {
-      margin-top: 10px;
       margin-left: 16px;
       display: none;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       font-size: 1em;
       color: #ccc;
     }
@@ -81,40 +79,34 @@
     }
     .pub-image {
       width: 50%;
-      height: 100%;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
     }
     .pub-image img {
-      max-height: 100%;
-      width: auto;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
       border-radius: 8px;
     }
     footer {
       text-align: center;
       font-size: 0.9rem;
       color: #ccc;
-      background: transparent;
       padding: 10px 0;
     }
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
         padding: 160px 20px 40px;
-        height: auto;
       }
       .pub-list,
       .pub-image {
         width: 100%;
       }
-      .pub-list { padding-right: 0; }
       .pub-image {
         margin-top: 30px;
-        justify-content: center;
       }
-      .pub-image img { max-width: 90%; }
     }
   </style>
 </head>
@@ -133,25 +125,58 @@
   </div>
   <div class="container">
     <div class="pub-list">
-      <h3 onclick="toggleSection('books')">Books</h3>
+      <div class="toggle" onclick="toggle('books')"><span id="icon-books">+</span> Books</div>
       <div id="books" class="sub-list">
-        <a href="https://www.routledge.com/Pamuks-Istanbul-The-Self-and-the-City/Narayan/p/book/9781032000206">Pamuk’s Istanbul (Routledge)</a>
-        <a href="https://www.amazon.in/Pamuks-Istanbul-Self-Pallavi-Narayan/dp/1032425334">Pamuk’s Istanbul (Amazon India)</a>
-        <a href="https://www.amazon.com/Singapore-At-Home-Across-Lines/dp/9811480451">Singapore at Home (Amazon US)</a>
-        <a href="https://www.amazon.in/Singapore-At-Home-Across-Lines-ebook/dp/B097D7WDN3">Singapore at Home (Kindle)</a>
+        <div class="toggle" onclick="toggle('pamuk')"><span id="icon-pamuk">+</span> Pamuk's Istanbul</div>
+        <div id="pamuk" class="sub-list">
+          <div class="toggle" onclick="toggle('pamukPurchase')"><span id="icon-pamukPurchase">+</span> Purchase</div>
+          <div id="pamukPurchase" class="sub-list">
+            <a href="https://www.amazon.in/Pamuks-Istanbul-Self-Pallavi-Narayan/dp/1032425334" target="_blank">Amazon India</a>
+            <a href="https://www.routledge.com/Pamuks-Istanbul-The-Self-and-the-City/Narayan/p/book/9781032000206" target="_blank">Routledge</a>
+          </div>
+          <div class="toggle" onclick="toggle('pamukReviews')"><span id="icon-pamukReviews">+</span> Reviews and Book Events</div>
+          <div id="pamukReviews" class="sub-list">
+            <a href="https://muse.jhu.edu/pub/303/article/881037" target="_blank">Review on Muse</a>
+            <a href="https://nesirdergisi.com/index.php/nesir/article/view/87/61" target="_blank">Nesir Review</a>
+            <a href="https://www.chrflagship.uwc.ac.za/pamuks-istanbul-the-self-and-the-city/" target="_blank">CHR Flagship</a>
+            <a href="https://research.jgu.edu.in/book-pamuks-istanbul-the-self-and-the-city/" target="_blank">JGU Research</a>
+            <a href="https://research.ku.edu.tr/events/?detail=true&id=9bdb495c-8890-437a-8ca5-0ce1083eaf11" target="_blank">KU Event</a>
+            <a href="https://ahduni.edu.in/academics/schools-centres/centre-for-learning-futures/ahmedabad-writing-programme/events/pamuks-istanbul-the-self-and-the-city/" target="_blank">Ahmedabad Writing Programme</a>
+          </div>
+        </div>
+        <div class="toggle" onclick="toggle('singapore')"><span id="icon-singapore">+</span> Singapore At Home</div>
+        <div id="singapore" class="sub-list">
+         
+          <div class="toggle" onclick="toggle('singaporePurchase')"><span id="icon-singaporePurchase">+</span> Purchase</div>
+          <div id="singaporePurchase" class="sub-list">
+            <a href="https://www.amazon.com/Singapore-At-Home-Across-Lines/dp/9811480451" target="_blank">Amazon US</a>
+            <a href="https://www.amazon.in/Singapore-At-Home-Across-Lines-ebook/dp/B097D7WDN3" target="_blank">Kindle India</a>
+          </div>
+          <div class="toggle" onclick="toggle('singaporeReviews')"><span id="icon-singaporeReviews">+</span> Reviews and Book Events</div>
+          <div id="singaporeReviews" class="sub-list">
+            <a href="https://uploads.knightlab.com/storymapjs/5130bdf451245237818bf8c74c9f5b76/singapore-at-home-life-across-lines/draft.html" target="_blank">StoryMap Event</a>
+            <a href="https://www.youtube.com/watch?v=dVusjRLMCFU&ab_channel=Kitaab" target="_blank">YouTube Video – Kitaab</a>
+            <a href="https://kitaab.org/2021/10/20/kitaab-at-swf-2021/" target="_blank">Kitaab at SWF 2021</a>
+            <a href="https://www.linkedin.com/posts/narayanpallavi_singapore-family-community-activity-6829962942935527424-IlBy/" target="_blank">LinkedIn Post</a>
+            <a href="https://www.newindianexpress.com/lifestyle/books/2022/Feb/19/book-review-singapore-at-home-life-across-lines-is-about-finding-home-2420760.html" target="_blank">New Indian Express Review</a>
+            <a href="https://vickychong.wordpress.com/2023/05/29/singapore-at-home-life-across-lines-edited-by-pallavi-narayan-and-iman-fahim-hameed/" target="_blank">Vicky Chong Blog</a>
+            <a href="https://gargimehra.com/2021/06/21/singapore-at-home/" target="_blank">Gargi Mehra Blog</a>
+            <a href="https://www.facebook.com/watch/?v=363801754867189" target="_blank">Facebook Video</a>
+            <a href="https://kitaab.org/2021/10/08/literary-news-book-event-with-writing-the-city-by-pallavi-narayan-and-iman-fahim-hameed/" target="_blank">Kitaab Literary News</a>
+          </div>
+        </div>
       </div>
-      <h3 onclick="toggleSection('papers')">Papers</h3>
+      <div class="toggle" onclick="toggle('papers')"><span id="icon-papers">+</span> Papers</div>
       <div id="papers" class="sub-list">
-        <span>2025. The Flâneuse in Turkish and Indian Fiction: Urban Inequality and Female Migrants. Urban Matters. Forthcoming July.</span>
-        <a href="https://muse.jhu.edu/pub/303/article/942138/pdf">2024. Shifting the Focus: World Literature Decentred by Ian Almond</a>
-        <a href="https://www.tandfonline.com/doi/full/10.1080/00049182.2022.2052556">2022. Editorial Introduction: Geography and Collective Memories through Art</a>
-        <a href="https://www.academia.edu/49100034/Resting_in_the_Met_Constructions_of_Homelike_Spaces_in_Christine_Coulson_s_Metropolitan_Stories">2021. Resting in the Met: Metropolitan Stories</a>
-        <a href="https://www.idea.org.tr/gender-domesticspace-novelsolddelhi">2021. Gender and Domestic Space in Ahmed Ali’s and Krishna Sobti’s Novels</a>
-        <a href="https://ghi2021.web.nycu.edu.tw/2021/01/07/documenting-visibility-representation-and-exclusion-across-borders/">2021. Documenting Visibility: Representation and Exclusion Across Borders</a>
-        <a href="https://cjdproject.web.nycu.edu.tw/wp-content/uploads/sites/167/2020/12/Narayan_2020_Decolonizing-the-Museum-Space-in-India.pdf">2021. Decolonizing the Museum Space in India: The Pandemic Influence</a>
-        <span>2013. Magical Objects: Visiting Orhan Pamuk’s Museum of Innocence. Literary Paritantra</span>
+        <a href="https://muse.jhu.edu/pub/303/article/942138/pdf">2024. Shifting the Focus</a>
+        <a href="https://www.tandfonline.com/doi/full/10.1080/00049182.2022.2052556">2022. Geography and Collective Memories</a>
+        <a href="https://www.academia.edu/49100034/Resting_in_the_Met_Constructions_of_Homelike_Spaces_in_Christine_Coulson_s_Metropolitan_Stories">2021. Resting in the Met</a>
+        <a href="https://www.idea.org.tr/gender-domesticspace-novelsolddelhi">2021. Gender and Domestic Space</a>
+        <a href="https://ghi2021.web.nycu.edu.tw/2021/01/07/documenting-visibility-representation-and-exclusion-across-borders/">2021. Documenting Visibility</a>
+        <a href="https://cjdproject.web.nycu.edu.tw/wp-content/uploads/sites/167/2020/12/Narayan_2020_Decolonizing-the-Museum-Space-in-India.pdf">2021. Decolonizing the Museum Space</a>
+        <span>2013. Magical Objects: Pamuk’s Museum of Innocence</span>
       </div>
-      <h3 onclick="toggleSection('articles')">Articles</h3>
+      <div class="toggle" onclick="toggle('articles')"><span id="icon-articles">+</span> Articles</div>
       <div id="articles" class="sub-list">
         <a href="https://scroll.in/article/963207/passing-the-pandemic-with-pamuk-how-to-travel-the-world-from-one-room-during-the-lockdown">Passing the Pandemic with Pamuk</a>
         <a href="https://impermanentearth.com/archive/pallavi-narayan/">The Green on Race Course Road</a>
@@ -161,36 +186,35 @@
         <a href="https://www.esplanade.com/offstage/arts/leela-samson-guru-of-quiet-transformations">Leela Samson</a>
         <a href="https://www.academia.edu/40333582/The_Museum_of_Innocence_in_Istanbul_Real_Objects_and_Fictional_Lives">Museum of Innocence</a>
         <a href="https://transit-asia.chss.nycu.edu.tw/GHI/documenting-visibility-representation-and-exclusion-across-borders/">Documenting Visibility – Transit Asia</a>
-
       </div>
-      <h3 onclick="toggleSection('interviews')">Interviews and Reviews</h3>
+      <div class="toggle" onclick="toggle('interviews')"><span id="icon-interviews">+</span> Interviews and Reviews</div>
       <div id="interviews" class="sub-list">
         <a href="https://www.academia.edu/128441356/The_Sublime_in_the_Subliminal">The Sublime in the Subliminal</a>
         <a href="http://www.qlrs.com/critique.asp?id=1923">Affinities and Tensions</a>
-        <a href="http://www.qlrs.com/critique.asp?id=1903">Diaspora Narratives of Contemporary Singapore</a>
+        <a href="http://www.qlrs.com/critique.asp?id=1903">Diaspora Narratives</a>
         <a href="http://www.qlrs.com/critique.asp?id=1865">A Delicacy of Feeling</a>
         <a href="http://qlrs.com/critique.asp?id=1847">Eve and the Lost Ghost Family</a>
-        <a href="https://www.newindianexpress.com/lifestyle/books/2021/Dec/26/interview-covid-19-pandemic-proved-how-little-we-need-to-live-author-siddharth-shanghvi-2399032.html">Interview: Siddharth Dhanvant Shanghvi</a>
+        <a href="https://www.newindianexpress.com/lifestyle/books/2021/Dec/26/interview-covid-19-pandemic-proved-how-little-we-need-to-live-author-siddharth-shanghvi-2399032.html">Interview: Shanghvi</a>
       </div>
-      <h3 onclick="toggleSection('shortstories')">Short Stories</h3>
+      <div class="toggle" onclick="toggle('shortstories')"><span id="icon-shortstories">+</span> Short Stories</div>
       <div id="shortstories" class="sub-list">
         <a href="https://www.amazon.com/42-Stories-Anthology-Presents-Book/dp/1990589243">Ultimate Rendezvous in Bed</a>
         <a href="https://www.academia.edu/116345194/Red_and_Gold_A_Literary_Fiasco">Red and Gold</a>
         <a href="https://boundindia.com/walking-talking-a-personal-essay/">Walking, Talking</a>
       </div>
-      <h3 onclick="toggleSection('poetry')">Poetry</h3>
+      <div class="toggle" onclick="toggle('poetry')"><span id="icon-poetry">+</span> Poetry</div>
       <div id="poetry" class="sub-list">
         <a href="https://www.academia.edu/128441162/_A_Jonker_Carriage_and_Malacca_Night_Market_">Malacca Night Market</a>
         <a href="http://kitaab.org/2020/06/04/poetry-peace-by-pallavi-narayan/">Peace</a>
       </div>
-      <h3 onclick="toggleSection('fellowships')">Fellowships</h3>
+      <div class="toggle" onclick="toggle('fellowships')"><span id="icon-fellowships">+</span> Fellowships</div>
       <div id="fellowships" class="sub-list">
         <a href="https://www.singlitstation.com/fellowship">Jalan Besar Writing Fellow</a>
         <a href="https://kuasia.ku.edu.tr/about-us/visiting-scholars/">Koç University Visiting Scholar</a>
         <a href="https://www.southasiaspeaks.org/cohort-2021/">South Asia Speaks Fellowship</a>
         <a href="https://transit-asia.chss.nycu.edu.tw/GHI/participants/">CHCI-Mellon GHI on Migration</a>
-        <a href="https://chcinetwork.org/programs/ghi-2019-translation/participants">CHCI-Global Humanities Institute Chile</a>
-        <a href="https://www.dohainstitute.edu.qa/en/News-and-Events/Pages/News-Details.aspx?Title=writing_retreat_SOSH_2025">GA:MA Lab Writing Retreat in Doha, Qatar</a>
+        <a href="https://chcinetwork.org/programs/ghi-2019-translation/participants">CHCI-GHI Chile</a>
+        <a href="https://www.dohainstitute.edu.qa/en/News-and-Events/Pages/News-Details.aspx?Title=writing_retreat_SOSH_2025">GA:MA Lab Writing Retreat</a>
       </div>
     </div>
     <div class="pub-image">
@@ -201,21 +225,23 @@
     © 2025 Pallavi Narayan. All rights reserved.
   </footer>
   <script>
-    function toggleSection(id) {
-      const lists = document.querySelectorAll('.sub-list');
-      lists.forEach(list => {
-        if (list.id !== id) {
-          list.classList.remove('show');
-        }
-      });
-      const target = document.getElementById(id);
-      if (target) {
-        target.classList.toggle('show');
+    function toggle(id) {
+      const section = document.getElementById(id);
+      const icon = document.getElementById('icon-' + id);
+      if (section.classList.contains('show')) {
+        section.classList.remove('show');
+        if (icon) icon.textContent = '+';
+      } else {
+        section.classList.add('show');
+        if (icon) icon.textContent = '–';
       }
     }
   </script>
 </body>
 </html>
+
+
+
 
 
 
