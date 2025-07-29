@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Workshops | Dr. Pallavi Narayan</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Georgia', serif;
@@ -83,52 +79,44 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      text-align: center;
+      padding: 10px;
     }
 
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .gallery-item span {
+      font-size: 1.2rem;
+      color: #fff;
     }
 
-    .modal {
+    /* Overlay for USA */
+    .overlay {
       display: none;
       position: fixed;
-      z-index: 999;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: flex-start;
-      padding: 40px;
     }
 
-    .modal-content {
-      max-width: 90%;
-      max-height: 90%;
-      overflow-y: scroll;
-      scrollbar-width: thin;
-      scrollbar-color: #888 #222;
-    }
-
-    .modal-content::-webkit-scrollbar {
-      width: 10px;
-    }
-    .modal-content::-webkit-scrollbar-track {
-      background: #222;
-    }
-    .modal-content::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 5px;
-    }
-
-    .modal-content img {
+    .overlay-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 1100px;
       width: 100%;
-      margin-bottom: 20px;
-      border-radius: 6px;
+    }
+
+    @media (min-width: 900px) {
+      .overlay-content {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     .close-btn {
@@ -140,6 +128,63 @@
       background: none;
       border: none;
       cursor: pointer;
+      z-index: 1100;
+    }
+
+    .overlay-block {
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .overlay-block h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .overlay-block img {
+      max-width: 100%;
+      border-radius: 6px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .slideshow {
+      position: relative;
+      max-width: 100%;
+    }
+
+    .slideshow img {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2em;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    .upcoming-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: #fff;
+      text-decoration: underline;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -176,22 +221,40 @@
     <div class="section">
       <h2>Previously Held Workshops</h2>
       <div class="gallery">
-        <div class="gallery-item" onclick="openModal('wokrshop 1.jpg')"><img src="wokrshop 1.jpg" alt="Workshop 1" /></div>
-        <div class="gallery-item" onclick="openModal('workshop 2.jpg')"><img src="workshop 2.jpg" alt="Workshop 2" /></div>
-        <div class="gallery-item" onclick="openModal('workshop 3.jpg')"><img src="workshop 3.jpg" alt="Workshop 3" /></div>
-        <div class="gallery-item" onclick="openModal('workshop 4.jpg')"><img src="workshop 4.jpg" alt="Workshop 4" /></div>
-        <div class="gallery-item" onclick="openModal('worksop 5.jpg')"><img src="worksop 5.jpg" alt="Workshop 5" /></div>
-        <div class="gallery-item" onclick="openModal('workshop 6.jpg')"><img src="workshop 6.jpg" alt="Workshop 6" /></div>
-        <div class="gallery-item" onclick="openModal('333229496_589639966073690_3920774654696558294_n.png.jpeg')"><img src="333229496_589639966073690_3920774654696558294_n.png.jpeg" alt="Workshop 7" /></div>
-        <div class="gallery-item" onclick="openModal('328323691_6063717757039748_9128552155786201540_n.jpg')"><img src="328323691_6063717757039748_9128552155786201540_n.jpg" alt="Workshop 8" /></div>
-        <div class="gallery-item" onclick="openModal('330429431_978395549813750_2343804784992194327_n.png.jpeg')"><img src="330429431_978395549813750_2343804784992194327_n.png.jpeg" alt="Workshop 9" /></div>
+        <div class="gallery-item" onclick="openUSAOverlay()"><span>USA</span></div>
+        <div class="gallery-item"><span>Turkey</span></div>
+        <div class="gallery-item"><span>Taiwan</span></div>
+        <div class="gallery-item"><span>Singapore</span></div>
+        <div class="gallery-item"><span>Qatar</span></div>
+        <div class="gallery-item"><span>Indonesia</span></div>
+        <div class="gallery-item"><span>India</span></div>
+        <div class="gallery-item"><span>Germany</span></div>
+        <div class="gallery-item"><span>Chile</span></div>
+        <div class="gallery-item"><span>Canada</span></div>
+        <div class="gallery-item"><span>Australia</span></div>
+        <div class="gallery-item"><span>Vietnam</span></div>
+        <div class="gallery-item"><span>South Asia Speaks</span></div>
       </div>
     </div>
   </div>
 
-  <div class="modal" id="modal">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <img id="modal-img" src="" alt="Workshop Full View" />
+  <!-- USA Overlay -->
+  <div class="overlay" id="usa-overlay">
+    <button class="close-btn" onclick="closeUSAOverlay()">×</button>
+    <div class="overlay-content">
+      <div class="overlay-block">
+        <h3>Secluded</h3>
+        <img src="Secluded 2020.jpg" alt="Secluded 2020">
+      </div>
+      <div class="overlay-block">
+        <h3>William Roland Gallery 2020</h3>
+        <div class="slideshow">
+          <button class="arrow left" onclick="prevWRG()">&#10094;</button>
+          <img id="wrg-slide" src="WRG1.jpg" alt="WRG1">
+          <button class="arrow right" onclick="nextWRG()">&#10095;</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="modal" id="upcoming-modal">
@@ -204,26 +267,43 @@
   </div>
 
   <script>
-    function openModal(src) {
-      document.getElementById("modal-img").src = src;
-      document.getElementById("modal").style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
-      document.getElementById("modal-img").src = "";
-    }
-
+    // Upcoming workshops modal
     function openUpcomingModal() {
       document.getElementById("upcoming-modal").style.display = "flex";
     }
-
     function closeUpcomingModal() {
       document.getElementById("upcoming-modal").style.display = "none";
+    }
+
+    // USA overlay
+    function openUSAOverlay() {
+      document.getElementById("usa-overlay").style.display = "flex";
+    }
+    function closeUSAOverlay() {
+      document.getElementById("usa-overlay").style.display = "none";
+    }
+
+    // WRG slideshow
+    const wrgImages = ["WRG1.jpg", "WRG2.jpg", "WRG3.jpg"];
+    let wrgIndex = 0;
+    function nextWRG() {
+      wrgIndex = (wrgIndex + 1) % wrgImages.length;
+      document.getElementById("wrg-slide").src = wrgImages[wrgIndex];
+    }
+    function prevWRG() {
+      wrgIndex = (wrgIndex - 1 + wrgImages.length) % wrgImages.length;
+      document.getElementById("wrg-slide").src = wrgImages[wrgIndex];
     }
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
