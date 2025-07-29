@@ -267,6 +267,11 @@
   </div>
 
   <script>
+    // Ensure overlay is closed on page load
+    window.onload = function () {
+      document.getElementById("usa-overlay").style.display = "none";
+    };
+
     // Upcoming workshops modal
     function openUpcomingModal() {
       document.getElementById("upcoming-modal").style.display = "flex";
@@ -295,6 +300,7 @@
       document.getElementById("wrg-slide").src = wrgImages[wrgIndex];
     }
   </script>
+
 </body>
 </html>
 
