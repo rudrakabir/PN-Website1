@@ -88,7 +88,7 @@
       color: #fff;
     }
 
-    /* Overlay for USA */
+    /* Overlay (shared) */
     .overlay {
       display: none;
       position: fixed;
@@ -212,11 +212,9 @@
         </div>
       </div>
       <a class="upcoming-link" 
-     href="https://docs.google.com/forms/d/1gnh-2VMwwZmO8cg1IN7tPwlY8mlu2JJBJr4PXSzfgNk/edit" 
-     target="_blank">
-    Register / Sign Up for Upcoming Workshops
-  </a>
-</div>
+         href="https://docs.google.com/forms/d/1gnh-2VMwwZmO8cg1IN7tPwlY8mlu2JJBJr4PXSzfgNk/edit" 
+         target="_blank">Register / Sign Up for Upcoming Workshops</a>
+    </div>
 
     <div class="section">
       <h2>Previously Held Workshops</h2>
@@ -231,7 +229,10 @@
         <div class="gallery-item"><span>Germany</span></div>
         <div class="gallery-item"><span>Chile</span></div>
         <div class="gallery-item"><span>Canada</span></div>
-        <div class="gallery-item"><span>Australia</span></div>
+
+        <!-- ⬇️ Australia now opens its own overlay ⬇️ -->
+        <div class="gallery-item" onclick="openAustraliaOverlay()"><span>Australia</span></div>
+
         <div class="gallery-item"><span>Vietnam</span></div>
         <div class="gallery-item"><span>South Asia Speaks</span></div>
       </div>
@@ -257,6 +258,19 @@
     </div>
   </div>
 
+  <!-- Australia Overlay (single centered block) -->
+  <div class="overlay" id="australia-overlay">
+    <button class="close-btn" onclick="closeAustraliaOverlay()">×</button>
+    <!-- Force single centered column without touching global CSS -->
+    <div class="overlay-content" style="grid-template-columns: 1fr; justify-items: center; max-width: 900px;">
+      <div class="overlay-block" style="max-width: 800px; width: 100%;">
+        <h3>Melbourne Event</h3>
+        <!-- Use your image filename here -->
+        <img src="publishing-industry.jpg" alt="Melbourne Event">
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="upcoming-modal">
     <button class="close-btn" onclick="closeUpcomingModal()">×</button>
     <div class="modal-content">
@@ -267,9 +281,11 @@
   </div>
 
   <script>
-    // Ensure overlay is closed on page load
+    // Ensure overlays are closed on page load
     window.onload = function () {
       document.getElementById("usa-overlay").style.display = "none";
+      var au = document.getElementById("australia-overlay");
+      if (au) au.style.display = "none";
     };
 
     // Upcoming workshops modal
@@ -288,6 +304,14 @@
       document.getElementById("usa-overlay").style.display = "none";
     }
 
+    // Australia overlay
+    function openAustraliaOverlay() {
+      document.getElementById("australia-overlay").style.display = "flex";
+    }
+    function closeAustraliaOverlay() {
+      document.getElementById("australia-overlay").style.display = "none";
+    }
+
     // WRG slideshow
     const wrgImages = ["WRG1.jpg", "WRG2.jpg", "WRG3.jpg"];
     let wrgIndex = 0;
@@ -303,6 +327,7 @@
 
 </body>
 </html>
+
 
 
 
