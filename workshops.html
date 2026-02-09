@@ -85,20 +85,19 @@
 
     /* Overlay (shared) */
     .overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 1000;
-  padding: 20px;
-  overflow-y: auto;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
 
-  /* Flex layout rules stay here (but hidden by default) */
-  align-items: center;
-  justify-content: center;
-}
-
+      display: none;          /* hidden by default */
+      align-items: center;
+      justify-content: center;
+    }
 
     .overlay-content {
       display: grid;
@@ -173,80 +172,6 @@
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
     .modal-content { max-width: 90vw; max-height: 90vh; overflow: auto; display: grid; gap: 20px; }
     .modal-content img { width: 100%; border-radius: 6px; }
-
-    /* ============================================================
-       ✅ INDIA OVERLAY FIX (ONLY INDIA)
-       Keeps all 4 blocks visible + prevents resizing/jumping
-       ============================================================ */
-
-    /* Start grid from top so it doesn't "center" and hide blocks */
-    #india-overlay {
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 90px; /* room so close button doesn't crowd top */
-    }
-
-    /* Make India grid use space efficiently and stay within viewport */
-    #india-overlay .overlay-content {
-      max-width: 1200px;
-      width: 100%;
-      gap: 24px;
-      align-items: stretch;
-      /* keeps the 2x2 view stable; scroll only if screen too short */
-      max-height: calc(100vh - 120px);
-    }
-
-    /* Keep India blocks same height/behavior */
-    #india-overlay .overlay-block {
-      width: 100%;
-      align-items: stretch; /* allows slideshow to fill width */
-      padding: 18px;
-    }
-
-    #india-overlay .overlay-block h3 {
-      margin-bottom: 12px;
-      font-size: 1.35rem; /* matches style but slightly tighter */
-    }
-
-    /* Fixed slideshow window so images can't change layout */
-    #india-overlay .slideshow {
-      width: 100%;
-      height: clamp(220px, 32vh, 320px);
-      background: #111;
-      border-radius: 6px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Images stay inside the window (no pushing other blocks) */
-    #india-overlay .slideshow img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 0; /* slideshow already has radius */
-      display: block;
-    }
-
-    /* Slightly tighter arrows inside India so they don't overlap too much */
-    #india-overlay .arrow {
-      padding: 8px 10px;
-    }
-
-    /* On smaller screens stack vertically; still stable */
-    @media (max-width: 899px) {
-      #india-overlay .overlay-content {
-        grid-template-columns: 1fr;
-        max-height: none;
-      }
-      #india-overlay {
-        padding-top: 80px;
-      }
-      #india-overlay .slideshow {
-        height: clamp(240px, 45vh, 420px);
-      }
-    }
   </style>
 </head>
 <body>
@@ -287,7 +212,6 @@
         <div class="gallery-item" onclick="openQatarOverlay()"><span>Qatar</span></div>
         <div class="gallery-item" onclick="openIndonesiaOverlay()"><span>Indonesia</span></div>
 
-        <!-- ✅ India clickable -->
         <div class="gallery-item" onclick="openIndiaOverlay()"><span>India</span></div>
 
         <div class="gallery-item" onclick="openGermanyOverlay()"><span>Germany</span></div>
@@ -295,6 +219,8 @@
         <div class="gallery-item" onclick="openCanadaOverlay()"><span>Canada</span></div>
         <div class="gallery-item" onclick="openAustraliaOverlay()"><span>Australia</span></div>
         <div class="gallery-item"><span>Vietnam</span></div>
+
+        <!-- South Asia Speaks: we’ll add overlay later -->
         <div class="gallery-item"><span>South Asia Speaks</span></div>
       </div>
     </div>
@@ -302,7 +228,7 @@
 
   <!-- ====== Overlays ====== -->
 
-  <!-- USA (existing, unchanged) -->
+  <!-- USA -->
   <div class="overlay" id="usa-overlay">
     <button class="close-btn" onclick="closeUSAOverlay()">×</button>
     <div class="overlay-content">
@@ -362,7 +288,7 @@
     </div>
   </div>
 
-  <!-- Indonesia (two blocks like USA) -->
+  <!-- Indonesia -->
   <div class="overlay" id="indonesia-overlay">
     <button class="close-btn" onclick="closeIndonesiaOverlay()">×</button>
     <div class="overlay-content">
@@ -381,7 +307,7 @@
     </div>
   </div>
 
-  <!-- Qatar (single centered slideshow) -->
+  <!-- Qatar -->
   <div class="overlay single-block" id="qatar-overlay">
     <button class="close-btn" onclick="closeQatarOverlay()">×</button>
     <div class="overlay-content">
@@ -396,7 +322,7 @@
     </div>
   </div>
 
-  <!-- Taiwan (two blocks like USA) -->
+  <!-- Taiwan -->
   <div class="overlay" id="taiwan-overlay">
     <button class="close-btn" onclick="closeTaiwanOverlay()">×</button>
     <div class="overlay-content">
@@ -419,7 +345,7 @@
     </div>
   </div>
 
-  <!-- ✅ India (4 blocks, stable 2x2 on desktop, arrows on each) -->
+  <!-- India -->
   <div class="overlay" id="india-overlay">
     <button class="close-btn" onclick="closeIndiaOverlay()">×</button>
 
@@ -475,12 +401,12 @@
   <script>
     // Close all overlays on load
     window.onload = function () {
-      ["usa","australia","canada","germany","indonesia","qatar","taiwan","india"]
-        .forEach(id => {
-          const el = document.getElementById(id + "-overlay");
-          if (el) el.style.display = "none";
-        });
-      document.getElementById("upcoming-modal").style.display = "none";
+      ["usa","australia","canada","germany","indonesia","qatar","taiwan","india"].forEach(function(id){
+        var el = document.getElementById(id + "-overlay");
+        if (el) el.style.display = "none";
+      });
+      var up = document.getElementById("upcoming-modal");
+      if (up) up.style.display = "none";
     };
 
     // Upcoming modal
@@ -490,8 +416,8 @@
     // USA
     function openUSAOverlay() { document.getElementById("usa-overlay").style.display = "flex"; }
     function closeUSAOverlay() { document.getElementById("usa-overlay").style.display = "none"; }
-    const wrgImages = ["WRG1.jpg", "WRG2.jpg", "WRG3.jpg"];
-    let wrgIndex = 0;
+    var wrgImages = ["WRG1.jpg", "WRG2.jpg", "WRG3.jpg"];
+    var wrgIndex = 0;
     function nextWRG() { wrgIndex = (wrgIndex + 1) % wrgImages.length; document.getElementById("wrg-slide").src = wrgImages[wrgIndex]; }
     function prevWRG() { wrgIndex = (wrgIndex - 1 + wrgImages.length) % wrgImages.length; document.getElementById("wrg-slide").src = wrgImages[wrgIndex]; }
 
@@ -502,110 +428,76 @@
     // Canada
     function openCanadaOverlay() { document.getElementById("canada-overlay").style.display = "flex"; }
     function closeCanadaOverlay() { document.getElementById("canada-overlay").style.display = "none"; }
-    const canadaImages = ["York Uni1.jpg", "York Uni 2.jpg"];
-    let canadaIndex = 0;
+    var canadaImages = ["York Uni1.jpg", "York Uni 2.jpg"];
+    var canadaIndex = 0;
     function nextCanada() { canadaIndex = (canadaIndex + 1) % canadaImages.length; document.getElementById("canada-slide").src = canadaImages[canadaIndex]; }
     function prevCanada() { canadaIndex = (canadaIndex - 1 + canadaImages.length) % canadaImages.length; document.getElementById("canada-slide").src = canadaImages[canadaIndex]; }
 
     // Germany
     function openGermanyOverlay() { document.getElementById("germany-overlay").style.display = "flex"; }
     function closeGermanyOverlay() { document.getElementById("germany-overlay").style.display = "none"; }
-    const germanyImages = ["FF1.jpg", "FF2.jpg"];
-    let germanyIndex = 0;
+    var germanyImages = ["FF1.jpg", "FF2.jpg"];
+    var germanyIndex = 0;
     function nextGermany() { germanyIndex = (germanyIndex + 1) % germanyImages.length; document.getElementById("germany-slide").src = germanyImages[germanyIndex]; }
     function prevGermany() { germanyIndex = (germanyIndex - 1 + germanyImages.length) % germanyImages.length; document.getElementById("germany-slide").src = germanyImages[germanyIndex]; }
 
     // Indonesia
     function openIndonesiaOverlay() { document.getElementById("indonesia-overlay").style.display = "flex"; }
     function closeIndonesiaOverlay() { document.getElementById("indonesia-overlay").style.display = "none"; }
-    const indonesiaImages = ["Indonesia.jpg", "Indonesia2.jpg"];
-    let indonesiaIndex = 0;
+    var indonesiaImages = ["Indonesia.jpg", "Indonesia2.jpg"];
+    var indonesiaIndex = 0;
     function nextIndonesia() { indonesiaIndex = (indonesiaIndex + 1) % indonesiaImages.length; document.getElementById("indonesia-slide").src = indonesiaImages[indonesiaIndex]; }
     function prevIndonesia() { indonesiaIndex = (indonesiaIndex - 1 + indonesiaImages.length) % indonesiaImages.length; document.getElementById("indonesia-slide").src = indonesiaImages[indonesiaIndex]; }
 
     // Qatar
     function openQatarOverlay() { document.getElementById("qatar-overlay").style.display = "flex"; }
     function closeQatarOverlay() { document.getElementById("qatar-overlay").style.display = "none"; }
-    const qatarImages = ["Doha1.jpeg", "Doha2.jpeg"];
-    let qatarIndex = 0;
+    var qatarImages = ["Doha1.jpeg", "Doha2.jpeg"];
+    var qatarIndex = 0;
     function nextQatar() { qatarIndex = (qatarIndex + 1) % qatarImages.length; document.getElementById("qatar-slide").src = qatarImages[qatarIndex]; }
     function prevQatar() { qatarIndex = (qatarIndex - 1 + qatarImages.length) % qatarImages.length; document.getElementById("qatar-slide").src = qatarImages[qatarIndex]; }
 
     // Taiwan
     function openTaiwanOverlay() { document.getElementById("taiwan-overlay").style.display = "flex"; }
     function closeTaiwanOverlay() { document.getElementById("taiwan-overlay").style.display = "none"; }
-    const redRoomImages = ["Red Room Taiwan.jpg", "Red Room Taiwan 3.jpg"];
-    let redRoomIndex = 0;
+    var redRoomImages = ["Red Room Taiwan.jpg", "Red Room Taiwan 3.jpg"];
+    var redRoomIndex = 0;
     function nextRedRoom() { redRoomIndex = (redRoomIndex + 1) % redRoomImages.length; document.getElementById("redroom-slide").src = redRoomImages[redRoomIndex]; }
     function prevRedRoom() { redRoomIndex = (redRoomIndex - 1 + redRoomImages.length) % redRoomImages.length; document.getElementById("redroom-slide").src = redRoomImages[redRoomIndex]; }
-    const chciImages = ["CHCI-Mellon GHI Taiwan 2021.jpg","CHCI-Mellon GHI Taiwan 3.jpg","CHCI-Mellon GHI Taiwan 2021 1.png","CHCI-Mellon GHI Taiwan 2021 2.png"];
-    let chciIndex = 0;
+
+    var chciImages = ["CHCI-Mellon GHI Taiwan 2021.jpg","CHCI-Mellon GHI Taiwan 3.jpg","CHCI-Mellon GHI Taiwan 2021 1.png","CHCI-Mellon GHI Taiwan 2021 2.png"];
+    var chciIndex = 0;
     function nextCHCI() { chciIndex = (chciIndex + 1) % chciImages.length; document.getElementById("chci-slide").src = chciImages[chciIndex]; }
     function prevCHCI() { chciIndex = (chciIndex - 1 + chciImages.length) % chciImages.length; document.getElementById("chci-slide").src = chciImages[chciIndex]; }
 
-    // ✅ India overlay open/close
+    // India open/close
     function openIndiaOverlay() { document.getElementById("india-overlay").style.display = "flex"; }
     function closeIndiaOverlay() { document.getElementById("india-overlay").style.display = "none"; }
 
-    // India — Ahmedabad events
-    const indiaAhmedabadImages = [
-      "India1.jpg","India2.jpg","India3.jpg","India4.jpg","India5.jpg","India6.jpg",
-      "India7.jpg","India8.jpg","India9.jpg","India10.jpg","India11.jpg"
-    ];
-    let indiaAhmedabadIndex = 0;
-    function nextIndiaAhmedabad() {
-      indiaAhmedabadIndex = (indiaAhmedabadIndex + 1) % indiaAhmedabadImages.length;
-      document.getElementById("india-ahmedabad-slide").src = indiaAhmedabadImages[indiaAhmedabadIndex];
-    }
-    function prevIndiaAhmedabad() {
-      indiaAhmedabadIndex = (indiaAhmedabadIndex - 1 + indiaAhmedabadImages.length) % indiaAhmedabadImages.length;
-      document.getElementById("india-ahmedabad-slide").src = indiaAhmedabadImages[indiaAhmedabadIndex];
-    }
+    // India arrays (EDIT IMAGE NAMES HERE)
+    var indiaAhmedabadImages = ["India1.jpg","India2.jpg","India3.jpg","India4.jpg","India5.jpg","India6.jpg","India7.jpg","India8.jpg","India9.jpg","India10.jpg","India11.jpg"];
+    var indiaAhmedabadIndex = 0;
+    function nextIndiaAhmedabad() { indiaAhmedabadIndex = (indiaAhmedabadIndex + 1) % indiaAhmedabadImages.length; document.getElementById("india-ahmedabad-slide").src = indiaAhmedabadImages[indiaAhmedabadIndex]; }
+    function prevIndiaAhmedabad() { indiaAhmedabadIndex = (indiaAhmedabadIndex - 1 + indiaAhmedabadImages.length) % indiaAhmedabadImages.length; document.getElementById("india-ahmedabad-slide").src = indiaAhmedabadImages[indiaAhmedabadIndex]; }
 
-    // India — Bangalore events
-    const indiaBangaloreImages = [
-      "IIHS.jpg","IIHS1.jpg","IIHS2.jpg","IIHS3.jpg","IIHS4.jpg","Cities in Literature.jpg","Cities in Literature1.jpg"
-    ];
-    let indiaBangaloreIndex = 0;
-    function nextIndiaBangalore() {
-      indiaBangaloreIndex = (indiaBangaloreIndex + 1) % indiaBangaloreImages.length;
-      document.getElementById("india-bangalore-slide").src = indiaBangaloreImages[indiaBangaloreIndex];
-    }
-    function prevIndiaBangalore() {
-      indiaBangaloreIndex = (indiaBangaloreIndex - 1 + indiaBangaloreImages.length) % indiaBangaloreImages.length;
-      document.getElementById("india-bangalore-slide").src = indiaBangaloreImages[indiaBangaloreIndex];
-    }
+    var indiaBangaloreImages = ["IIHS.jpg","IIHS1.jpg","IIHS2.jpg","IIHS3.jpg","IIHS4.jpg","Cities in Literature.jpg","Cities in Literature1.jpg"];
+    var indiaBangaloreIndex = 0;
+    function nextIndiaBangalore() { indiaBangaloreIndex = (indiaBangaloreIndex + 1) % indiaBangaloreImages.length; document.getElementById("india-bangalore-slide").src = indiaBangaloreImages[indiaBangaloreIndex]; }
+    function prevIndiaBangalore() { indiaBangaloreIndex = (indiaBangaloreIndex - 1 + indiaBangaloreImages.length) % indiaBangaloreImages.length; document.getElementById("india-bangalore-slide").src = indiaBangaloreImages[indiaBangaloreIndex]; }
 
-    // India — Delhi events
-    const indiaDelhiImages = [
-      "Jindal 1.jpg","Jindal 2.jpg","JIndal 3.jpg","Jindal 5.jpg"
-    ];
-    let indiaDelhiIndex = 0;
-    function nextIndiaDelhi() {
-      indiaDelhiIndex = (indiaDelhiIndex + 1) % indiaDelhiImages.length;
-      document.getElementById("india-delhi-slide").src = indiaDelhiImages[indiaDelhiIndex];
-    }
-    function prevIndiaDelhi() {
-      indiaDelhiIndex = (indiaDelhiIndex - 1 + indiaDelhiImages.length) % indiaDelhiImages.length;
-      document.getElementById("india-delhi-slide").src = indiaDelhiImages[indiaDelhiIndex];
-    }
+    var indiaDelhiImages = ["Jindal 1.jpg","Jindal 2.jpg","JIndal 3.jpg","Jindal 5.jpg"];
+    var indiaDelhiIndex = 0;
+    function nextIndiaDelhi() { indiaDelhiIndex = (indiaDelhiIndex + 1) % indiaDelhiImages.length; document.getElementById("india-delhi-slide").src = indiaDelhiImages[indiaDelhiIndex]; }
+    function prevIndiaDelhi() { indiaDelhiIndex = (indiaDelhiIndex - 1 + indiaDelhiImages.length) % indiaDelhiImages.length; document.getElementById("india-delhi-slide").src = indiaDelhiImages[indiaDelhiIndex]; }
 
-    // India — Goa/Mumbai events
-    const indiaGoaMumbaiImages = [
-      "Bound1.jpg","Bound2.jpg","Bound3.jpg","Bound4.jpg","Bound5.jpg","Bound6.jpg","Bound8.jpg","Bound9.jpg" "Bound10.jpg"
-    ];
-    let indiaGoaMumbaiIndex = 0;
-    function nextIndiaGoaMumbai() {
-      indiaGoaMumbaiIndex = (indiaGoaMumbaiIndex + 1) % indiaGoaMumbaiImages.length;
-      document.getElementById("india-goamumbai-slide").src = indiaGoaMumbaiImages[indiaGoaMumbaiIndex];
-    }
-    function prevIndiaGoaMumbai() {
-      indiaGoaMumbaiIndex = (indiaGoaMumbaiIndex - 1 + indiaGoaMumbaiImages.length) % indiaGoaMumbaiImages.length;
-      document.getElementById("india-goamumbai-slide").src = indiaGoaMumbaiImages[indiaGoaMumbaiIndex];
-    }
+    var indiaGoaMumbaiImages = ["Bound1.jpg","Bound2.jpg","Bound3.jpg","Bound4.jpg","Bound5.jpg","Bound6.jpg","Bound8.jpg","Bound9.jpg","Bound10.jpg"];
+    var indiaGoaMumbaiIndex = 0;
+    function nextIndiaGoaMumbai() { indiaGoaMumbaiIndex = (indiaGoaMumbaiIndex + 1) % indiaGoaMumbaiImages.length; document.getElementById("india-goamumbai-slide").src = indiaGoaMumbaiImages[indiaGoaMumbaiIndex]; }
+    function prevIndiaGoaMumbai() { indiaGoaMumbaiIndex = (indiaGoaMumbaiIndex - 1 + indiaGoaMumbaiImages.length) % indiaGoaMumbaiImages.length; document.getElementById("india-goamumbai-slide").src = indiaGoaMumbaiImages[indiaGoaMumbaiIndex]; }
   </script>
 </body>
 </html>
+
 
 
 
