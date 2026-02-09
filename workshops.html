@@ -172,6 +172,20 @@
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
     .modal-content { max-width: 90vw; max-height: 90vh; overflow: auto; display: grid; gap: 20px; }
     .modal-content img { width: 100%; border-radius: 6px; }
+
+  /* INDIA ONLY – keep all 4 blocks visible */
+#india-overlay {
+  align-items: flex-start;
+}
+
+#india-overlay .overlay-content {
+  margin-top: 40px;
+}
+
+#india-overlay .slideshow img {
+  height: 280px;
+  object-fit: contain;
+}
   </style>
 </head>
 <body>
