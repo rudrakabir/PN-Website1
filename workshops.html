@@ -85,18 +85,20 @@
 
     /* Overlay (shared) */
     .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 1000;
-      padding: 20px;
-      overflow-y: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+
+  /* Flex layout rules stay here (but hidden by default) */
+  align-items: center;
+  justify-content: center;
+}
+
 
     .overlay-content {
       display: grid;
