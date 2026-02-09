@@ -171,6 +171,80 @@
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
     .modal-content { max-width: 90vw; max-height: 90vh; overflow: auto; display: grid; gap: 20px; }
     .modal-content img { width: 100%; border-radius: 6px; }
+
+    /* ============================================================
+       ✅ INDIA OVERLAY FIX (ONLY INDIA)
+       Keeps all 4 blocks visible + prevents resizing/jumping
+       ============================================================ */
+
+    /* Start grid from top so it doesn't "center" and hide blocks */
+    #india-overlay {
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 90px; /* room so close button doesn't crowd top */
+    }
+
+    /* Make India grid use space efficiently and stay within viewport */
+    #india-overlay .overlay-content {
+      max-width: 1200px;
+      width: 100%;
+      gap: 24px;
+      align-items: stretch;
+      /* keeps the 2x2 view stable; scroll only if screen too short */
+      max-height: calc(100vh - 120px);
+    }
+
+    /* Keep India blocks same height/behavior */
+    #india-overlay .overlay-block {
+      width: 100%;
+      align-items: stretch; /* allows slideshow to fill width */
+      padding: 18px;
+    }
+
+    #india-overlay .overlay-block h3 {
+      margin-bottom: 12px;
+      font-size: 1.35rem; /* matches style but slightly tighter */
+    }
+
+    /* Fixed slideshow window so images can't change layout */
+    #india-overlay .slideshow {
+      width: 100%;
+      height: clamp(220px, 32vh, 320px);
+      background: #111;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Images stay inside the window (no pushing other blocks) */
+    #india-overlay .slideshow img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 0; /* slideshow already has radius */
+      display: block;
+    }
+
+    /* Slightly tighter arrows inside India so they don't overlap too much */
+    #india-overlay .arrow {
+      padding: 8px 10px;
+    }
+
+    /* On smaller screens stack vertically; still stable */
+    @media (max-width: 899px) {
+      #india-overlay .overlay-content {
+        grid-template-columns: 1fr;
+        max-height: none;
+      }
+      #india-overlay {
+        padding-top: 80px;
+      }
+      #india-overlay .slideshow {
+        height: clamp(240px, 45vh, 420px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -196,8 +270,8 @@
           <img src="a.png" alt="Upcoming Workshop Preview" />
         </div>
       </div>
-      <a class="upcoming-link" 
-         href="https://docs.google.com/forms/d/1gnh-2VMwwZmO8cg1IN7tPwlY8mlu2JJBJr4PXSzfgNk/edit" 
+      <a class="upcoming-link"
+         href="https://docs.google.com/forms/d/1gnh-2VMwwZmO8cg1IN7tPwlY8mlu2JJBJr4PXSzfgNk/edit"
          target="_blank">Register / Sign Up for Upcoming Workshops</a>
     </div>
 
@@ -210,7 +284,10 @@
         <div class="gallery-item"><span>Singapore</span></div>
         <div class="gallery-item" onclick="openQatarOverlay()"><span>Qatar</span></div>
         <div class="gallery-item" onclick="openIndonesiaOverlay()"><span>Indonesia</span></div>
-        <div class="gallery-item"><span>India</span></div>
+
+        <!-- ✅ India clickable -->
+        <div class="gallery-item" onclick="openIndiaOverlay()"><span>India</span></div>
+
         <div class="gallery-item" onclick="openGermanyOverlay()"><span>Germany</span></div>
         <div class="gallery-item"><span>Chile</span></div>
         <div class="gallery-item" onclick="openCanadaOverlay()"><span>Canada</span></div>
@@ -340,6 +417,49 @@
     </div>
   </div>
 
+  <!-- ✅ India (4 blocks, stable 2x2 on desktop, arrows on each) -->
+  <div class="overlay" id="india-overlay">
+    <button class="close-btn" onclick="closeIndiaOverlay()">×</button>
+
+    <div class="overlay-content">
+      <div class="overlay-block">
+        <h3>Ahmedabad events</h3>
+        <div class="slideshow">
+          <button class="arrow left" onclick="prevIndiaAhmedabad()">&#10094;</button>
+          <img id="india-ahmedabad-slide" src="India1.jpg" alt="Ahmedabad events 1">
+          <button class="arrow right" onclick="nextIndiaAhmedabad()">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="overlay-block">
+        <h3>Bangalore events</h3>
+        <div class="slideshow">
+          <button class="arrow left" onclick="prevIndiaBangalore()">&#10094;</button>
+          <img id="india-bangalore-slide" src="IIHS.jpg" alt="Bangalore events 1">
+          <button class="arrow right" onclick="nextIndiaBangalore()">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="overlay-block">
+        <h3>Delhi events</h3>
+        <div class="slideshow">
+          <button class="arrow left" onclick="prevIndiaDelhi()">&#10094;</button>
+          <img id="india-delhi-slide" src="Jindal 1.jpg" alt="Delhi events 1">
+          <button class="arrow right" onclick="nextIndiaDelhi()">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="overlay-block">
+        <h3>Goa/Mumbai events</h3>
+        <div class="slideshow">
+          <button class="arrow left" onclick="prevIndiaGoaMumbai()">&#10094;</button>
+          <img id="india-goamumbai-slide" src="Bound1.jpg" alt="Goa/Mumbai events 1">
+          <button class="arrow right" onclick="nextIndiaGoaMumbai()">&#10095;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Upcoming modal -->
   <div class="modal" id="upcoming-modal">
     <button class="close-btn" onclick="closeUpcomingModal()">×</button>
@@ -353,8 +473,11 @@
   <script>
     // Close all overlays on load
     window.onload = function () {
-      ["usa","australia","canada","germany","indonesia","qatar","taiwan"]
-        .forEach(id => { const el = document.getElementById(id+"-overlay"); if (el) el.style.display = "none"; });
+      ["usa","australia","canada","germany","indonesia","qatar","taiwan","india"]
+        .forEach(id => {
+          const el = document.getElementById(id + "-overlay");
+          if (el) el.style.display = "none";
+        });
       document.getElementById("upcoming-modal").style.display = "none";
     };
 
@@ -417,9 +540,73 @@
     let chciIndex = 0;
     function nextCHCI() { chciIndex = (chciIndex + 1) % chciImages.length; document.getElementById("chci-slide").src = chciImages[chciIndex]; }
     function prevCHCI() { chciIndex = (chciIndex - 1 + chciImages.length) % chciImages.length; document.getElementById("chci-slide").src = chciImages[chciIndex]; }
+
+    // ✅ India overlay open/close
+    function openIndiaOverlay() { document.getElementById("india-overlay").style.display = "flex"; }
+    function closeIndiaOverlay() { document.getElementById("india-overlay").style.display = "none"; }
+
+    // India — Ahmedabad events
+    const indiaAhmedabadImages = [
+      "India1.jpg","India2.jpg","India3.jpg","India4.jpg","India5.jpg","India6.jpg",
+      "India7.jpg","India8.jpg","India9.jpg","India10.jpg","India11.jpg"
+    ];
+    let indiaAhmedabadIndex = 0;
+    function nextIndiaAhmedabad() {
+      indiaAhmedabadIndex = (indiaAhmedabadIndex + 1) % indiaAhmedabadImages.length;
+      document.getElementById("india-ahmedabad-slide").src = indiaAhmedabadImages[indiaAhmedabadIndex];
+    }
+    function prevIndiaAhmedabad() {
+      indiaAhmedabadIndex = (indiaAhmedabadIndex - 1 + indiaAhmedabadImages.length) % indiaAhmedabadImages.length;
+      document.getElementById("india-ahmedabad-slide").src = indiaAhmedabadImages[indiaAhmedabadIndex];
+    }
+
+    // India — Bangalore events
+    const indiaBangaloreImages = [
+      "IIHS.jpg","IIHS1.jpg","IIHS2.jpg","IIHS3.jpg","IIHS4.jpg","Cities in Literature.jpg","Cities in Literature1.jpg"
+    ];
+    let indiaBangaloreIndex = 0;
+    function nextIndiaBangalore() {
+      indiaBangaloreIndex = (indiaBangaloreIndex + 1) % indiaBangaloreImages.length;
+      document.getElementById("india-bangalore-slide").src = indiaBangaloreImages[indiaBangaloreIndex];
+    }
+    function prevIndiaBangalore() {
+      indiaBangaloreIndex = (indiaBangaloreIndex - 1 + indiaBangaloreImages.length) % indiaBangaloreImages.length;
+      document.getElementById("india-bangalore-slide").src = indiaBangaloreImages[indiaBangaloreIndex];
+    }
+
+    // India — Delhi events
+    const indiaDelhiImages = [
+      "Jindal 1.jpg","Jindal 2.jpg","JIndal 3.jpg","Jindal 5.jpg"
+    ];
+    let indiaDelhiIndex = 0;
+    function nextIndiaDelhi() {
+      indiaDelhiIndex = (indiaDelhiIndex + 1) % indiaDelhiImages.length;
+      document.getElementById("india-delhi-slide").src = indiaDelhiImages[indiaDelhiIndex];
+    }
+    function prevIndiaDelhi() {
+      indiaDelhiIndex = (indiaDelhiIndex - 1 + indiaDelhiImages.length) % indiaDelhiImages.length;
+      document.getElementById("india-delhi-slide").src = indiaDelhiImages[indiaDelhiIndex];
+    }
+
+    // India — Goa/Mumbai events
+    const indiaGoaMumbaiImages = [
+      "Bound1.jpg","Bound2.jpg","Bound3.jpg","Bound4.jpg","Bound5.jpg","Bound6.jpg","Bound8.jpg","Bound9.jpg","Bound10.jpg"
+    ];
+    let indiaGoaMumbaiIndex = 0;
+    function nextIndiaGoaMumbai() {
+      indiaGoaMumbaiIndex = (indiaGoaMumbaiIndex + 1) % indiaGoaMumbaiImages.length;
+      document.getElementById("india-goamumbai-slide").src = indiaGoaMumbaiImages[indiaGoaMumbaiIndex];
+    }
+    function prevIndiaGoaMumbai() {
+      indiaGoaMumbaiIndex = (indiaGoaMumbaiIndex - 1 + indiaGoaMumbaiImages.length) % indiaGoaMumbaiImages.length;
+      document.getElementById("india-goamumbai-slide").src = indiaGoaMumbaiImages[indiaGoaMumbaiIndex];
+    }
   </script>
 </body>
 </html>
+
+
+
 
 
 
